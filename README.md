@@ -4,7 +4,7 @@
 
 Pehli Baar helps students who are the first in their families to attend college understand complex admission letters, scholarship forms, fee receipts, and hostel notices — explained in simple Hindi + English by an AI "bade bhai/behen."
 
-### 🔗 [Live Demo →](https://pehli-baar.vercel.app)
+### 🔗 [Live Demo →](https://project1-jet-six.vercel.app)
 
 ---
 
