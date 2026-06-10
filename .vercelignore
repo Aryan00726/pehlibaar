@@ -1,0 +1,8 @@
+node_modules
+.env
+.git
+.DS_Store
+pehli-baar-backend/node_modules
+pehli-baar-backend/dist
+pehli-baar-backend/.env
+*.log

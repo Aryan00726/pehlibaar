@@ -1,0 +1,456 @@
+/* ═══════════════════════════════════════════════════════
+   PEHLI BAAR — Global Styles & Animations
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Reset & Base ─────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Paper Grain Overlay ──────────────────────────── */
+.paper-grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.03;
+    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+}
+
+.grain-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.03;
+    background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+}
+
+.noise-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/felt.png");
+    opacity: 0.05;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.paper-texture {
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    background-repeat: repeat;
+}
+
+.paper-shadow {
+    box-shadow: 0 4px 24px rgba(28, 18, 8, 0.08);
+}
+
+
+/* ── Screen System (SPA Transitions) ─────────────── */
+.screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px) scale(0.98);
+    transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0.5s;
+    background: #fff8f0; /* bg-background */
+    will-change: opacity, transform;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    z-index: 10;
+    transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0s linear 0s;
+}
+
+.screen.exit-down {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+    z-index: 5;
+}
+
+.screen.exit-up {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.96);
+    z-index: 5;
+}
+
+
+/* ── Onboarding Hero Entry Animation ─────────────── */
+.onboarding-hero {
+    animation: hero-float-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-float-in {
+    from {
+        opacity: 0;
+        transform: translateY(32px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ── Dashboard Stagger Entrance ──────────────────── */
+.screen.active .dashboard-stagger {
+    animation: stagger-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.1s + var(--stagger, 0) * 0.1s);
+}
+
+@keyframes stagger-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ── Detail Screen Stagger ───────────────────────── */
+.screen.active .detail-stagger {
+    animation: detail-slide-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(0.15s + var(--stagger, 0) * 0.08s);
+}
+
+@keyframes detail-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ── Wavy Dividers ────────────────────────────────── */
+.wavy-divider {
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='8' viewBox='0 0 100 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4C12.5 4 12.5 1 25 1C37.5 1 37.5 7 50 7C62.5 7 62.5 1 75 1C87.5 1 87.5 7 100 7' stroke='%23E8D9C0' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+}
+
+.wavy-divider-detail {
+    mask-image: url("data:image/svg+xml,%3Csvg width='100' height='10' viewBox='0 0 100 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5 Q 12.5 0, 25 5 T 50 5 T 75 5 T 100 5' stroke='black' fill='transparent'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+}
+
+
+/* ── Animated Dashed Border (Upload Zone) ─────────── */
+.animated-border {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='12' ry='12' stroke='%23D4500A' stroke-width='3' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 12px;
+    animation: border-dance 4s linear infinite;
+}
+
+@keyframes border-dance {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+
+/* ── Mandala Spinner ──────────────────────────────── */
+@keyframes chakra-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-chakra {
+    animation: chakra-spin 20s linear infinite;
+}
+
+
+/* ── Progress Bar Fill ────────────────────────────── */
+.progress-line-fill {
+    transition: width 0.5s ease-out;
+}
+
+
+/* ── Waveform Audio Bars ──────────────────────────── */
+.waveform-bar {
+    animation: wave 1.2s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+@keyframes wave {
+    0%, 100% { height: 4px; }
+    50% { height: 16px; }
+}
+
+
+/* ── Material Symbols Defaults ────────────────────── */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}
+
+
+/* ── Interactive Button Micro-feedback ────────────── */
+.category-btn:active,
+.doc-card:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+}
+
+
+/* ── Nav Link Active States ──────────────────────── */
+.nav-link.active {
+    background-color: #aef2c2; /* secondary-container */
+    color: #31704a; /* on-secondary-container */
+    font-weight: 700;
+    transform: translateX(4px);
+}
+
+.bottom-nav-link.active {
+    background-color: #cb4a01; /* primary-container */
+    color: #fffbff; /* on-primary-container */
+    border-radius: 9999px;
+}
+
+
+/* ── Ripple Effect ────────────────────────────────── */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(162, 57, 0, 0.15);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+
+/* ── Checkbox Strikethrough Animation ─────────────── */
+input[type="checkbox"]:checked + div p:first-child {
+    text-decoration: line-through;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+
+/* ── Smooth page-level scrollbar ──────────────────── */
+.screen::-webkit-scrollbar {
+    width: 6px;
+}
+.screen::-webkit-scrollbar-track {
+    background: transparent;
+}
+.screen::-webkit-scrollbar-thumb {
+    background-color: rgba(141, 113, 103, 0.25);
+    border-radius: 3px;
+}
+.screen::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(141, 113, 103, 0.5);
+}
+
+
+/* ── Success Check Animation (processing complete) ── */
+@keyframes check-pop {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.check-complete {
+    animation: check-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+
+/* ── Pulse glow for upload zone on hover ──────────── */
+#upload-zone:hover {
+    box-shadow: 0 0 40px rgba(203, 74, 1, 0.08), 0 4px 24px rgba(28, 18, 8, 0.06);
+}
+
+
+/* ── Responsive adjustments ──────────────────────── */
+@media (max-width: 768px) {
+    .screen.active .dashboard-stagger {
+        animation-delay: calc(0.05s + var(--stagger, 0) * 0.06s);
+    }
+}
+
+
+/* ── Selection highlight ──────────────────────────── */
+::selection {
+    background: #ffdbce;
+    color: #370e00;
+}
+
+
+/* ── Focus visible for accessibility ──────────────── */
+:focus-visible {
+    outline: 2px solid #a23900;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+/* ── Language chip selected state ─────────────────── */
+.lang-chip .selected-ring {
+    box-shadow: 0 0 0 3px #a23900, 0 0 0 6px rgba(162, 57, 0, 0.15);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   LOGIN SCREEN STYLES
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Login Hero Entrance ─────────────────────────── */
+.login-hero {
+    animation: login-hero-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes login-hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ── Login Card Entrance ─────────────────────────── */
+.login-card {
+    animation: login-card-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+@keyframes login-card-in {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Sparkle Badge Pulse ─────────────────────────── */
+.login-sparkle {
+    animation: sparkle-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes sparkle-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(155, 108, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 4px 16px rgba(155, 108, 0, 0.35);
+    }
+}
+
+/* ── OTP Input Focus Glow ────────────────────────── */
+.otp-box:focus {
+    border-color: #a23900;
+    box-shadow: 0 0 0 3px rgba(162, 57, 0, 0.12);
+    background-color: #fff8f0;
+}
+
+.otp-box.filled {
+    border-color: #2a6a45;
+    background-color: #aef2c2;
+    color: #00210f;
+}
+
+/* ── OTP Section Reveal ──────────────────────────── */
+#otp-section.show {
+    display: block;
+    animation: otp-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes otp-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 200px;
+    }
+}
+
+/* ── Loading Spinner (inside button) ─────────────── */
+.btn-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Shake Animation (for errors) ────────────────── */
+.shake {
+    animation: shake-x 0.4s ease-in-out;
+}
+
+@keyframes shake-x {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+/* ── Phone input number-only styling ─────────────── */
+#login-phone {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+}

@@ -1,0 +1,10 @@
+{
+  "name": "pehli-baar",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd pehli-baar-backend && npm run dev",
+    "build": "cd pehli-baar-backend && npm run build",
+    "vercel-build": "cd pehli-baar-backend && npm install && npm run build"
+  }
+}

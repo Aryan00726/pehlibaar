@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html class="light" lang="hi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Pehli Baar — First-Gen Student Document Guide</title>
+    <meta name="description" content="Pehli Baar helps first-generation college students understand complex documents in their native language with AI-powered translations and audio explanations."/>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Identity Services (GIS) Client -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet"/>
+    <!-- Material Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Tailwind Config (shared design tokens) -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#9b6c00",
+                        "on-surface": "#1e1b16",
+                        "surface-container": "#f4ede3",
+                        "tertiary-fixed-dim": "#f9bc51",
+                        "inverse-primary": "#ffb599",
+                        "surface-variant": "#e8e2d8",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#31704a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#faf3e9",
+                        "inverse-on-surface": "#f7f0e6",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8d7167",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#e1bfb3",
+                        "secondary-fixed-dim": "#93d5a7",
+                        "on-tertiary-container": "#fffbff",
+                        "on-surface-variant": "#594138",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "surface-dim": "#e0d9d0",
+                        "surface-bright": "#fff8f0",
+                        "surface-container-highest": "#e8e2d8",
+                        "primary": "#a23900",
+                        "surface-container-high": "#eee7dd",
+                        "inverse-surface": "#33302a",
+                        "tertiary": "#7b5500",
+                        "on-primary-fixed": "#370e00",
+                        "surface": "#fff8f0",
+                        "on-secondary-fixed-variant": "#0b522f",
+                        "on-primary-fixed-variant": "#7f2b00",
+                        "on-secondary-fixed": "#00210f",
+                        "primary-container": "#cb4a01",
+                        "primary-fixed-dim": "#ffb599",
+                        "primary-fixed": "#ffdbce",
+                        "surface-tint": "#a63b00",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#aef2c2",
+                        "on-tertiary-fixed": "#281900",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#aef2c2",
+                        "on-tertiary-fixed-variant": "#604100",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdeac",
+                        "on-background": "#1e1b16",
+                        "secondary": "#2a6a45",
+                        "background": "#fff8f0"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        base: "8px",
+                        "margin-desktop": "40px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        gutter: "24px",
+                        "container-max": "1200px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Tiro Devanagari Hindi"],
+                        "label-sm": ["DM Mono"],
+                        "headline-lg-mobile": ["Tiro Devanagari Hindi"],
+                        "headline-md": ["Tiro Devanagari Hindi"],
+                        "display-lg": ["Tiro Devanagari Hindi"],
+                        "body-lg": ["DM Sans"],
+                        "body-md": ["DM Sans"],
+                        "label-md": ["DM Mono"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "1.2", letterSpacing: "0.04em", fontWeight: "500" }],
+                        "headline-lg-mobile": ["28px", { lineHeight: "1.3", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "1.4", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed overflow-hidden">
+
+    <!-- Paper Grain Overlay -->
+    <div class="paper-grain"></div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 0: LOGIN                                 -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-login" class="screen active" data-screen="login">
+        <div class="noise-texture"></div>
+
+        <!-- Credentials Setup Gear Button (Floating) -->
+        <button id="btn-open-settings" class="absolute top-6 right-6 z-[100] p-3 bg-surface-container-high border border-outline-variant rounded-full text-on-surface hover:bg-surface-container-highest transition-all duration-150 active:scale-95 shadow-sm flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl">settings</span>
+        </button>
+
+        <!-- Credentials Setup Modal -->
+        <div id="settings-modal" class="fixed inset-0 z-[1000] hidden flex flex-col items-center justify-center bg-inverse-surface/85 backdrop-blur-md p-6">
+            <div class="w-full max-w-md bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-2xl flex flex-col relative p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-outline-variant pb-3">
+                    <h3 class="font-headline-md text-headline-md text-primary font-bold">API / OAuth Credentials Setup</h3>
+                    <button id="settings-close" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-1.5 rounded-full transition-colors active:scale-90">close</button>
+                </div>
+                <p class="text-body-sm font-body-sm text-on-surface-variant">Configure your custom API credentials here to connect real SMS and Google Sign-in. If left blank, Sandbox simulation modes will remain active.</p>
+                
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label for="setup-twilio-sid" class="text-label-sm font-label-sm text-on-surface-variant block">Twilio Account SID</label>
+                        <input type="text" id="setup-twilio-sid" placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label for="setup-twilio-token" class="text-label-sm font-label-sm text-on-surface-variant block">Twilio Auth Token</label>
+                        <input type="password" id="setup-twilio-token" placeholder="Your Twilio Auth Token" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label for="setup-twilio-from" class="text-label-sm font-label-sm text-on-surface-variant block">Twilio Phone Number</label>
+                        <input type="text" id="setup-twilio-from" placeholder="+1234567890" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label for="setup-google-client" class="text-label-sm font-label-sm text-on-surface-variant block">Google OAuth Client ID</label>
+                        <input type="text" id="setup-google-client" placeholder="your-client-id.apps.googleusercontent.com" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all"/>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-3 border-t border-outline-variant">
+                    <button id="btn-save-settings" class="flex-1 py-3 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md hover:bg-primary-container transition-all active:scale-[0.98]">Save & Connect</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Sandbox Login Modal -->
+        <div id="google-sandbox-modal" class="fixed inset-0 z-[1000] hidden flex flex-col items-center justify-center bg-inverse-surface/85 backdrop-blur-md p-6">
+            <div class="w-full max-w-sm bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-2xl flex flex-col relative p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-outline-variant pb-3">
+                    <div class="flex items-center gap-2">
+                        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#FBBC05" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        <h3 class="font-headline-md text-headline-md text-primary font-bold">Google Sandbox Login</h3>
+                    </div>
+                    <button id="google-sandbox-close" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-1.5 rounded-full transition-colors active:scale-90">close</button>
+                </div>
+                <p class="text-body-sm font-body-sm text-on-surface-variant">Configure custom profile information for your Sandbox session.</p>
+                
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <label for="sandbox-name" class="text-label-sm font-label-sm text-on-surface-variant block">Full Name</label>
+                        <input type="text" id="sandbox-name" placeholder="E.g., Aryan" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all" value="Aryan"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label for="sandbox-email" class="text-label-sm font-label-sm text-on-surface-variant block">Email Address</label>
+                        <input type="email" id="sandbox-email" placeholder="E.g., aryan@example.com" class="w-full px-3 py-2 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:border-primary outline-none transition-all" value="aryan@example.com"/>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-3 border-t border-outline-variant">
+                    <button id="btn-sandbox-submit" class="flex-1 py-3 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md hover:bg-primary-container transition-all active:scale-[0.98]">Confirm Sandbox Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative notebook lines background -->
+        <div class="absolute inset-0 z-0 opacity-[0.06] pointer-events-none select-none overflow-hidden">
+            <div class="absolute top-0 left-[8%] w-px h-full bg-primary/30"></div>
+            <div class="absolute top-0 left-[10%] w-px h-full bg-primary/30"></div>
+            <div class="flex flex-col gap-10 w-full mt-16 px-6">
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+                <div class="h-px w-full bg-outline-variant/40"></div>
+            </div>
+        </div>
+
+        <main class="relative z-10 w-full min-h-screen flex flex-col items-center justify-start md:justify-center py-6 sm:py-10 px-margin-mobile md:px-margin-desktop">
+            <div class="w-full max-w-md mx-auto flex flex-col items-center my-auto">
+
+                <!-- Brand Icon -->
+                <div class="login-hero mb-4 sm:mb-6 flex flex-col items-center">
+                    <div class="relative mb-3 sm:mb-4 group">
+                        <div class="absolute -inset-6 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700"></div>
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 bg-surface-container-lowest border-2 border-outline-variant rounded-full flex items-center justify-center paper-shadow relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed/30 to-transparent"></div>
+                            <div class="relative flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-3xl sm:text-4xl md:text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200;">school</span>
+                            </div>
+                        </div>
+                        <!-- Decorative sparkle -->
+                        <div class="absolute -top-1 -right-1 w-6 h-6 sm:w-8 sm:h-8 bg-tertiary-fixed-dim rounded-full flex items-center justify-center shadow-md login-sparkle">
+                            <span class="material-symbols-outlined text-on-tertiary-fixed text-xs sm:text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        </div>
+                    </div>
+                    <h1 class="font-display-lg text-headline-lg sm:text-display-lg text-primary tracking-tight mb-0.5" data-i18n="app_title">पहली बार</h1>
+                    <p class="font-body-md text-label-md sm:text-headline-md text-on-surface-variant">Pehli Baar</p>
+                </div>
+
+                <!-- Login Card -->
+                <div class="w-full bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 sm:p-8 paper-shadow space-y-4 sm:space-y-6 login-card">
+
+                    <div class="text-center mb-2">
+                        <h2 class="text-headline-md font-headline-md text-on-surface mb-1" data-i18n="login_heading">स्वागत है!</h2>
+                        <p class="text-body-md font-body-md text-on-surface-variant" data-i18n="login_subheading">Sign in to access your documents</p>
+                    </div>
+
+                    <!-- Name Input -->
+                    <div class="space-y-2">
+                        <label for="login-name" class="text-label-md font-label-md text-on-surface-variant block">Name / नाम</label>
+                        <input
+                            type="text"
+                            id="login-name"
+                            placeholder="Enter your name / अपना नाम दर्ज करें"
+                            class="w-full px-4 py-3 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        />
+                    </div>
+
+                    <!-- Phone Number Input -->
+                    <div class="space-y-2">
+                        <label for="login-phone" class="text-label-md font-label-md text-on-surface-variant block" data-i18n="phone_label">Phone Number / फ़ोन नंबर</label>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center gap-1 px-3 py-3 bg-surface-container-high rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-label-md shrink-0">
+                                <span class="text-sm">🇮🇳</span>
+                                <span>+91</span>
+                            </div>
+                            <input
+                                type="tel"
+                                id="login-phone"
+                                placeholder="98765 43210"
+                                maxlength="10"
+                                class="flex-1 px-4 py-3 bg-surface-container-high border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- OTP Section (hidden initially) -->
+                    <div id="otp-section" class="space-y-2 hidden">
+                        <label class="text-label-md font-label-md text-on-surface-variant block" data-i18n="otp_label">OTP / वन-टाइम पासवर्ड</label>
+                        <div class="flex gap-2 sm:gap-3 justify-center" id="otp-inputs">
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="0"/>
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="1"/>
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="2"/>
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="3"/>
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="4"/>
+                            <input type="text" maxlength="1" class="otp-box w-9 h-11 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-surface-container-high border-2 border-outline-variant rounded-xl text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" data-otp-index="5"/>
+                        </div>
+                        <p class="text-center text-label-sm font-label-sm text-on-surface-variant mt-2">
+                            Didn't receive? <button id="btn-resend-otp" class="text-primary font-bold hover:underline" data-i18n="resend_otp">Resend OTP</button>
+                        </p>
+                    </div>
+
+                    <!-- Send OTP / Verify Button -->
+                    <button id="btn-send-otp" class="w-full py-4 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md paper-shadow hover:bg-primary-container transition-all active:scale-[0.97] duration-150 flex items-center justify-center gap-3">
+                        <span class="material-symbols-outlined">sms</span>
+                        <span id="btn-otp-text" data-i18n="send_otp">OTP भेजें / Send OTP</span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="flex items-center gap-4">
+                        <div class="flex-1 h-px bg-outline-variant"></div>
+                        <span class="text-label-sm font-label-sm text-outline uppercase tracking-widest">or</span>
+                        <div class="flex-1 h-px bg-outline-variant"></div>
+                    </div>
+
+                    <!-- Google Sign In -->
+                    <button id="btn-google-login" class="w-full py-3.5 bg-surface-container-high border border-outline-variant rounded-xl font-label-md text-label-md text-on-surface paper-shadow hover:bg-surface-container-highest transition-all active:scale-[0.97] duration-150 flex items-center justify-center gap-3">
+                        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#34A853" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#FBBC05" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                        <span data-i18n="or_google">Continue with Google</span>
+                    </button>
+                </div>
+
+                <!-- Privacy Footer -->
+                <div class="mt-6 sm:mt-8 flex flex-col items-center gap-2 sm:gap-3">
+                    <div class="flex items-center gap-2 px-5 py-2.5 bg-secondary/5 rounded-full border border-secondary/10">
+                        <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        <p class="font-label-sm text-label-sm text-on-secondary-fixed-variant" data-i18n="safe_data">आपका डेटा सुरक्षित है</p>
+                    </div>
+                    <p class="text-label-sm font-label-sm text-outline text-center max-w-xs">
+                        By continuing, you agree to our <a href="#" onclick="navigateTo('terms'); return false;" class="text-primary hover:underline">Terms</a> & <a href="#" onclick="navigateTo('privacy'); return false;" class="text-primary hover:underline">Privacy Policy</a>
+                    </p>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 1: ONBOARDING / SPLASH                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-onboarding" class="screen" data-screen="onboarding">
+        <div class="noise-texture"></div>
+        <main class="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop py-12">
+
+            <!-- Hero -->
+            <div class="mb-16 md:mb-20 flex flex-col items-center onboarding-hero">
+                <div class="relative mb-8 group">
+                    <div class="absolute -inset-4 bg-tertiary/5 rounded-full blur-2xl group-hover:bg-tertiary/10 transition-colors duration-500"></div>
+                    <div class="w-32 h-32 md:w-48 md:h-48 bg-surface-container-lowest border border-outline-variant rounded-full flex items-center justify-center paper-shadow relative">
+                        <div class="relative flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-6xl md:text-8xl" style="font-variation-settings: 'FILL' 0, 'wght' 200;">content_paste_search</span>
+                            <span class="material-symbols-outlined text-tertiary absolute -top-2 -right-2 text-3xl md:text-5xl" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="font-display-lg text-display-lg text-primary mb-4 tracking-tight" data-i18n="app_title">पहली बार</h1>
+                <p class="font-headline-md text-headline-lg-mobile md:text-headline-md text-on-surface-variant max-w-lg leading-relaxed text-center">
+                    <span data-i18n="tagline">कोई भी दस्तावेज़, अब आसान भाषा में</span>
+                </p>
+            </div>
+
+            <!-- Wavy Divider -->
+            <div class="w-full max-w-md mb-10">
+                <div class="wavy-divider opacity-40"></div>
+            </div>
+
+            <!-- Language Selector -->
+            <section class="w-full max-w-2xl mb-12">
+                <h2 class="font-label-md text-label-md text-outline uppercase tracking-widest mb-6 text-center" data-i18n="select_language">Select Your Language</h2>
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-4" id="lang-grid">
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">हिंदी</div>
+                    </button>
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">मराठी</div>
+                    </button>
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">தமிழ்</div>
+                    </button>
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">বাংলা</div>
+                    </button>
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">తెలుగు</div>
+                    </button>
+                    <button class="lang-chip group flex flex-col items-center gap-2 outline-none focus:ring-2 focus:ring-primary rounded-xl p-2 transition-all" onclick="selectLang(this)">
+                        <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-outline-variant bg-surface-container-lowest flex items-center justify-center text-body-lg font-headline-md paper-shadow group-hover:border-primary transition-colors">EN</div>
+                    </button>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <div class="flex flex-col items-center gap-8 w-full max-w-sm">
+                <button id="btn-begin" class="w-full py-5 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md paper-shadow hover:bg-primary-container transition-all active:scale-95 duration-150" data-i18n="begin_button">
+                    शुरू करें / Let's Begin
+                </button>
+                <div class="flex items-center gap-2 px-6 py-3 bg-secondary/5 rounded-full border border-secondary/10">
+                    <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    <p class="font-label-sm text-label-sm text-on-secondary-fixed-variant">आपका डेटा आपके फ़ोन पर रहता है</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notebook Lines Background -->
+        <div class="absolute inset-0 z-0 opacity-10 pointer-events-none select-none overflow-hidden">
+            <div class="absolute top-0 left-1/4 w-px h-full bg-outline-variant"></div>
+            <div class="absolute top-0 left-[26%] w-px h-full bg-outline-variant"></div>
+            <div class="flex flex-col gap-8 w-full mt-20 px-10">
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+                <div class="h-px w-full bg-outline-variant/30"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 2: DASHBOARD / HOME                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-dashboard" class="screen" data-screen="dashboard">
+
+        <!-- SideNavBar (Desktop Only) -->
+        <aside class="fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col w-64 bg-surface-container-low p-base gap-2 border-r border-outline-variant">
+            <div class="p-4 mb-6">
+                <h1 class="text-headline-md font-headline-md font-bold text-primary">Pehli Baar</h1>
+                <p class="text-label-md font-label-md text-on-surface-variant opacity-70">First-Gen Student Guide</p>
+            </div>
+            <nav class="flex flex-col gap-1" id="desktop-nav">
+                <a class="nav-link active bg-secondary-container text-on-secondary-container rounded-xl font-bold px-4 py-3 flex items-center gap-3 transition-transform duration-200 translate-x-1" href="#" data-nav="home">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                    <span class="font-label-md text-label-md" data-i18n="nav_home">Home</span>
+                </a>
+                <a class="nav-link text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-xl flex items-center gap-3 transition-all duration-200" href="#" data-nav="docs">
+                    <span class="material-symbols-outlined">description</span>
+                    <span class="font-label-md text-label-md" data-i18n="nav_docs">Documents</span>
+                </a>
+                <a class="nav-link text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-xl flex items-center gap-3 transition-all duration-200" href="#" data-nav="glossary">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <span class="font-label-md text-label-md" data-i18n="nav_glossary">Glossary</span>
+                </a>
+                <a class="nav-link text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-xl flex items-center gap-3 transition-all duration-200" href="#" data-nav="support">
+                    <span class="material-symbols-outlined">contact_support</span>
+                    <span class="font-label-md text-label-md" data-i18n="nav_support">Support</span>
+                </a>
+                <a class="nav-link text-on-surface-variant px-4 py-3 hover:bg-surface-container-high rounded-xl flex items-center gap-3 transition-all duration-200 cursor-pointer" onclick="toggleLanguageMenu(event)">
+                    <span class="material-symbols-outlined">translate</span>
+                    <span class="font-label-md text-label-md" data-i18n="change_language">Change Language</span>
+                </a>
+            </nav>
+            <div class="mt-auto p-4 bg-surface-container-highest rounded-2xl border border-outline-variant">
+                <div class="flex items-center justify-between mb-4 gap-2">
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <img alt="Student Profile Picture" class="w-10 h-10 rounded-full object-cover border-2 border-primary shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn8fczulyJWhHI2dIFJ3z083_SALdHANpma3xGzLbnLoyalz4MS3ocagaVYFcpBxIm9w1xxa1s6GpITjzBKJZRKTPacPziy4CGXnMtiILZrO75uf2qw-LV744hYfk1AoXqJk9dqjZB7gQJdbgderD5mrWIJHLcZIlqpsMRhc6pi3gNkNMR_kAmYe3rSp0xoW00ytnXfn6HTjK7L1KmCGwIlQsIKqGE4PQXhdZjlt8Tre97T7dFBeJNgm2NgmjzAwpMfqDmLZNJHvm_"/>
+                        <div class="overflow-hidden">
+                            <p class="font-bold text-on-surface truncate text-sm" id="profile-name">Aryan</p>
+                            <p class="text-[10px] text-on-surface-variant truncate" id="profile-email">First-Year Student</p>
+                        </div>
+                    </div>
+                    <button id="btn-logout-desktop" class="material-symbols-outlined text-on-surface-variant hover:text-error hover:bg-surface-container-high p-1.5 rounded-full transition-all duration-150 active:scale-90 shrink-0" title="Logout" style="font-variation-settings: 'FILL' 0;">
+                        logout
+                    </button>
+                </div>
+                <button id="sidebar-upload-btn" class="w-full bg-primary text-white py-2 px-4 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95 duration-150" data-i18n="nav_upload">
+                    Upload Document
+                </button>
+            </div>
+        </aside>
+
+        <!-- TopAppBar (Mobile Only) -->
+        <header class="fixed top-0 left-0 w-full z-50 flex md:hidden justify-between items-center px-margin-mobile h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <h1 class="text-headline-md font-headline-md font-bold text-primary" data-i18n="app_title">Pehli Baar</h1>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors" onclick="toggleLanguageMenu(event)">translate</span>
+                <span id="btn-logout-mobile" class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors" title="Logout">logout</span>
+            </div>
+        </header>
+
+        <!-- Main Content Canvas -->
+        <main class="md:ml-64 pt-20 md:pt-10 pb-32 md:pb-10 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto">
+            <div class="max-w-container-max mx-auto space-y-12 md:space-y-16">
+
+                <!-- Greetings Section -->
+                <section class="space-y-2 dashboard-stagger" style="--stagger: 0">
+                    <h2 class="text-headline-lg font-headline-lg text-on-surface" id="greeting-text">Good morning, Aryan 👋</h2>
+                    <h3 class="text-headline-md font-headline-md text-tertiary" id="greeting-sub-text" data-i18n="greeting_sub">नमस्ते, Aryan</h3>
+                </section>
+
+                <!-- Upload Zone -->
+                <section class="relative dashboard-stagger" style="--stagger: 1">
+                    <div id="upload-zone" class="w-full h-[320px] md:h-[400px] flex flex-col items-center justify-center bg-surface-container-lowest animated-border p-8 text-center transition-all hover:bg-surface-bright group cursor-pointer active:scale-[0.98]">
+                        <div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-white text-4xl">add_a_photo</span>
+                        </div>
+                        <h2 class="text-headline-md font-headline-md mb-2" data-i18n="upload_title">दस्तावेज़ की फ़ोटो लें</h2>
+                        <p class="text-body-md font-body-md text-on-surface-variant mb-8" data-i18n="upload_desc">Take a photo of your document to translate &amp; explain</p>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <button id="btn-upload-camera" class="px-4 py-2 bg-secondary-container/10 text-secondary border border-secondary/20 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-secondary/10 transition-colors">
+                                <span class="material-symbols-outlined text-sm">photo_camera</span> <span data-i18n="camera">Camera</span>
+                            </button>
+                            <button id="btn-upload-gallery" class="px-4 py-2 bg-secondary-container/10 text-secondary border border-secondary/20 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-secondary/10 transition-colors">
+                                <span class="material-symbols-outlined text-sm">image</span> <span data-i18n="gallery">Gallery</span>
+                            </button>
+                            <button id="btn-upload-pdf" class="px-4 py-2 bg-secondary-container/10 text-secondary border border-secondary/20 rounded-full font-label-md text-label-md flex items-center gap-2 hover:bg-secondary/10 transition-colors">
+                                <span class="material-symbols-outlined text-sm">picture_as_pdf</span> <span data-i18n="pdf">PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Select Categories -->
+                <section class="dashboard-stagger" style="--stagger: 2">
+                    <div class="flex items-center justify-between mb-6">
+                        <h4 class="text-label-md font-label-md uppercase tracking-wider text-on-surface-variant" data-i18n="categories_all">Categories</h4>
+                        <div class="wavy-divider flex-1 mx-4"></div>
+                    </div>
+                    <div class="flex overflow-x-auto gap-4 pb-4 no-scrollbar">
+                        <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 p-4 min-w-[100px] bg-surface-container-high rounded-2xl hover:bg-primary-container hover:text-white transition-all group">
+                            <span class="material-symbols-outlined text-2xl">school</span>
+                            <span class="text-label-sm font-label-sm" data-i18n="categories_admit">Admit Letter</span>
+                        </button>
+                        <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 p-4 min-w-[100px] bg-surface-container-high rounded-2xl hover:bg-primary-container hover:text-white transition-all group">
+                            <span class="material-symbols-outlined text-2xl">payments</span>
+                            <span class="text-label-sm font-label-sm" data-i18n="categories_scholarship">Scholarship</span>
+                        </button>
+                        <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 p-4 min-w-[100px] bg-surface-container-high rounded-2xl hover:bg-primary-container hover:text-white transition-all group">
+                            <span class="material-symbols-outlined text-2xl">apartment</span>
+                            <span class="text-label-sm font-label-sm" data-i18n="categories_hostel">Hostel</span>
+                        </button>
+                        <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 p-4 min-w-[100px] bg-surface-container-high rounded-2xl hover:bg-primary-container hover:text-white transition-all group">
+                            <span class="material-symbols-outlined text-2xl">receipt_long</span>
+                            <span class="text-label-sm font-label-sm" data-i18n="categories_fee">Fee</span>
+                        </button>
+                        <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 p-4 min-w-[100px] bg-surface-container-high rounded-2xl hover:bg-primary-container hover:text-white transition-all group">
+                            <span class="material-symbols-outlined text-2xl">campaign</span>
+                            <span class="text-label-sm font-label-sm" data-i18n="categories_notice">Notice</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Recent Documents Grid -->
+                <section class="dashboard-stagger" style="--stagger: 3">
+                    <h4 class="text-headline-md font-headline-md text-on-surface mb-6" data-i18n="nav_docs">Recent Documents</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+
+                        <!-- Document Card 1 -->
+                        <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer" data-doc="hostel">
+                            <div class="flex gap-4 mb-4">
+                                <div class="w-24 h-32 bg-surface-variant rounded-lg overflow-hidden relative">
+                                    <img alt="Document Thumbnail" class="w-full h-full object-cover blur-[2px] opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUuVYQE71pUvsQ9KlmpsL4guyaF1lUscoSlezldzKPGBQ6j8Vg2GNCo494GTWKwvZTVk3iBAokR_I5laoMC43Z4bMToH3V8qifjunAyr9lVta0VpPaVkz3frdcRZKbbo8YojeqD_l7WEwmDvVS6wMh4Vj9Ii1P0OP2Nq5ODmiUVs6Vr8xLMU4jjUgixuMyC0EqsXApdUM3VA2Y1brI9VOWgaNtVAbrF0B0S5502spzC_qYLRMNytl3URlJOi0Ky-PYZINq8_zVRlsM"/>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-3xl opacity-50">description</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-between py-1">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-md text-[10px] font-label-sm font-bold uppercase tracking-tight">Hindi Explanation</span>
+                                            <p class="text-label-sm font-label-sm text-on-surface-variant">Oct 12, 2023</p>
+                                        </div>
+                                        <h5 class="font-bold text-on-surface leading-tight" data-i18n="doc_hostel">Hostel Allotment Rules</h5>
+                                        <p class="text-xs text-on-surface-variant mt-1">Hostel Room #402, Block B</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="flex-1 bg-tertiary-container/10 text-tertiary-container py-2 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-1 hover:bg-tertiary-container hover:text-white transition-colors">
+                                            <span class="material-symbols-outlined text-sm">volume_up</span> <span data-i18n="listen">Listen</span>
+                                        </button>
+                                        <button class="flex-1 border border-outline-variant text-on-surface-variant py-2 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-1 hover:bg-surface-container-high transition-colors">
+                                            <span class="material-symbols-outlined text-sm">replay</span> Re-Explain
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Document Card 2 -->
+                        <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer" data-doc="fee">
+                            <div class="flex gap-4 mb-4">
+                                <div class="w-24 h-32 bg-surface-variant rounded-lg overflow-hidden relative">
+                                    <img alt="Document Thumbnail" class="w-full h-full object-cover blur-[2px] opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZn_mR3E7X7Ax0CUH6JznmhAym1_Lv3wmMpDm7n-qdEsAs8qdFF1vBC5lrpv61uGgapWa1VVvq6m7d0EBRs_QDk9uotXTVyDmvXiqvTBS011z5EraV52YGbqroArGaTP9VT7nRR9o9Xyq9tQscfjtELJ0ah_CTCAKjES2RpS9s__5pRs3vOSs8eiG3oXMflTlkHcCGp1W4Ytj4C1fC_1rkxmau0Ucylgk9PtxQDRiyem94jIR-v3KckRVtSdnpfTv8VkS7SDKHlC2c"/>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-3xl opacity-50">description</span>
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex flex-col justify-between py-1">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="px-2 py-1 bg-secondary/10 text-secondary rounded-md text-[10px] font-label-sm font-bold uppercase tracking-tight">Marathi Explanation</span>
+                                            <p class="text-label-sm font-label-sm text-on-surface-variant">Oct 09, 2023</p>
+                                        </div>
+                                        <h5 class="font-bold text-on-surface leading-tight" data-i18n="doc_hostel">Tuition Fee Receipt</h5>
+                                        <p class="text-xs text-on-surface-variant mt-1">Semester 1 - Paid Fully</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="flex-1 bg-tertiary-container/10 text-tertiary-container py-2 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-1 hover:bg-tertiary-container hover:text-white transition-colors">
+                                            <span class="material-symbols-outlined text-sm">volume_up</span> <span data-i18n="listen">Listen</span>
+                                        </button>
+                                        <button class="flex-1 border border-outline-variant text-on-surface-variant py-2 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-1 hover:bg-surface-container-high transition-colors">
+                                            <span class="material-symbols-outlined text-sm">replay</span> Re-Explain
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- BottomNavBar (Mobile Only) -->
+        <nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-2 py-3 bg-surface shadow-[0_-4px_24px_rgba(28,18,8,0.08)] rounded-t-xl" id="bottom-nav">
+            <a class="bottom-nav-link active flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-transform" href="#" data-nav="home">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                <span class="text-label-sm font-label-sm">Home</span>
+            </a>
+            <a class="bottom-nav-link flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high transition-colors" href="#" data-nav="docs">
+                <span class="material-symbols-outlined">description</span>
+                <span class="text-label-sm font-label-sm">Docs</span>
+            </a>
+            <a class="bottom-nav-link flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high transition-colors" href="#" data-nav="glossary">
+                <span class="material-symbols-outlined">menu_book</span>
+                <span class="text-label-sm font-label-sm">Glossary</span>
+            </a>
+            <a class="bottom-nav-link flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:bg-surface-container-high transition-colors" href="#" data-nav="help">
+                <span class="material-symbols-outlined">help</span>
+                <span class="text-label-sm font-label-sm">Help</span>
+            </a>
+        </nav>
+
+        <!-- Floating Action Button (Mobile Only) -->
+        <button id="fab-upload" class="fixed bottom-24 right-6 md:hidden w-16 h-16 bg-primary text-white rounded-2xl shadow-xl flex items-center justify-center active:scale-90 transition-transform z-40">
+            <span class="material-symbols-outlined text-3xl">add_a_photo</span>
+        </button>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 3: PROCESSING / LOADING                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-processing" class="screen" data-screen="processing">
+        <div class="grain-overlay"></div>
+        <main class="fixed inset-0 z-[100] bg-surface-bright flex flex-col items-center justify-between py-12 px-6">
+            <!-- Top: Document Thumbnail -->
+            <div class="w-full max-w-xs flex flex-col items-center animate-pulse">
+                <div class="relative bg-surface-container-lowest border border-outline-variant p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] rounded-lg">
+                    <img alt="Document Preview" class="w-32 h-44 object-cover rounded shadow-sm opacity-80 grayscale-[30%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm8dFy8R3JbB23cTBCEFRavNGyk-e-iEoUEiFHfowyhkG92jRZOSJCgjjhkv3RGCcRynQeUhRVnzaNKiwmmozF7_kfzemkTUkyJWDVzLpCx7w8Ni7jDjPtSlOrBw_-_rJALfgyl43JZXBCK0Xekdw8YVrpQH_COx2v9j4xplSYt0_AByhd_9OSQQFrJ7d4mc1wLSfuMk8eVUIuNJMwqKPNZG4gmfTPkVKHwAbYkJj76qUkU4tgcbGVX38DY9-1VCN3XQverP6kz1Lb"/>
+                    <div class="absolute -top-2 -right-2 bg-secondary text-on-secondary p-1 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[18px]">verified</span>
+                    </div>
+                </div>
+                <p class="mt-4 font-label-md text-label-md text-on-surface-variant tracking-wider uppercase">Processing Document</p>
+            </div>
+
+            <!-- Center: Mandala Spinner -->
+            <div class="relative flex flex-col items-center justify-center flex-grow w-full max-w-md">
+                <div class="relative w-48 h-48 md:w-64 md:h-64 flex items-center justify-center">
+                    <svg class="animate-chakra w-full h-full text-primary opacity-20" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5"></circle>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(0 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(45 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(90 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(135 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(180 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(225 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(270 50 50)"></path>
+                        <path d="M50 5 L55 20 L50 35 L45 20 Z" fill="currentColor" transform="rotate(315 50 50)"></path>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-32 h-32 md:w-44 md:h-44 rounded-full border border-primary/20 flex items-center justify-center bg-surface-bright/50 backdrop-blur-sm">
+                            <span class="material-symbols-outlined text-primary text-[48px] md:text-[64px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cycling Status Text -->
+                <div class="mt-12 text-center h-16">
+                    <p class="font-headline-md text-headline-md text-primary transition-all duration-700 opacity-0 transform translate-y-2" id="status-text">
+                        दस्तावेज़ पढ़ा जा रहा है...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom: Progress & Branding -->
+            <div class="w-full max-w-xl px-4 space-y-8">
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-end font-label-md text-label-md text-on-surface-variant">
+                        <span>प्रगति (Progress)</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="h-[6px] w-full bg-surface-container-highest rounded-full overflow-hidden">
+                        <div class="progress-line-fill h-full bg-tertiary-container w-0 rounded-full shadow-[0_0_8px_rgba(155,108,0,0.3)]" id="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <p class="font-headline-md font-bold text-primary">Pehli Baar</p>
+                    <div class="flex items-center gap-2 opacity-60">
+                        <span class="material-symbols-outlined text-sm">shield</span>
+                        <span class="font-label-sm text-label-sm">Safe and Secure Data Processing</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div class="fixed bottom-0 left-0 w-full h-1 bg-tertiary opacity-10 z-[110]"></div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 4: DOCUMENT DETAIL / EXPLANATION         -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-detail" class="screen" data-screen="detail">
+
+        <!-- Top App Bar -->
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <div class="flex items-center gap-4">
+                <button id="btn-back-detail" class="material-symbols-outlined text-primary active:scale-95 transition-transform">arrow_back</button>
+                <span class="text-headline-md font-headline-md font-bold text-primary" data-i18n="app_title">Pehli Baar</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full cursor-pointer transition-colors" onclick="toggleLanguageMenu(event)">translate</span>
+                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full cursor-pointer transition-colors">notifications</span>
+            </div>
+        </header>
+
+        <main class="max-w-[1200px] mx-auto pt-24 pb-32 px-margin-mobile md:px-margin-desktop space-y-12 md:space-y-16 overflow-y-auto min-h-screen">
+
+            <!-- Header Info -->
+            <section class="flex flex-col md:flex-row gap-gutter items-start detail-stagger" style="--stagger: 0">
+                <div class="w-24 h-24 rounded-xl overflow-hidden shadow-sm border border-outline-variant flex-shrink-0">
+                    <img alt="Scholarship Form Thumbnail" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrpPhqWQRPSTgGgZ6x2zJ97V-2jbxVXLhjYDVC9Fqxjg11qcomEucYojcc1SMeUV_t5ecvPJaSoThtJ34kKuteqjWTfM5PHLnxff8JNszABzHkecL3JZzybXKqIflxmf4aYNkUhFgAe2NpPXey67XFqrb34zVNn_9jyTpf8Oum2mnmYB1UPCbChZyI0s_CB6JDUR5joa8lKD_69qOFDpzp3EyMymLhYo6PzN8ASP6oV7AkRvaQzKWgbSyFeBFKOjzdPa94nshDEb_v"/>
+                </div>
+                <div class="flex-grow">
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span id="detail-category" class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-label-sm font-label-sm" data-i18n="categories_scholarship">Document</span>
+                        <span id="detail-language" class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-sm font-label-sm">Hindi</span>
+                        <span id="detail-date" class="text-on-surface-variant text-label-sm font-label-sm ml-auto">Just Now</span>
+                    </div>
+                    <h1 id="detail-title" class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-surface">दस्तावेज़ / Document</h1>
+                    <div class="flex gap-4 mt-4">
+                        <button class="flex items-center gap-2 text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors"><span class="material-symbols-outlined">volume_up</span> <span class="text-label-md font-label-md" data-i18n="listen">सुनें</span></button>
+                        <button class="flex items-center gap-2 text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors"><span class="material-symbols-outlined">share</span> <span class="text-label-md font-label-md" data-i18n="share">शेयर करें</span></button>
+                        <button class="flex items-center gap-2 text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-colors"><span class="material-symbols-outlined">bookmark</span> <span class="text-label-md font-label-md" data-i18n="save">सहेजें</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TL;DR Card -->
+            <section class="detail-stagger" style="--stagger: 1">
+                <div class="bg-tertiary-fixed-dim/20 border-l-8 border-tertiary-container rounded-xl p-6 shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+                    <div class="flex items-center gap-2 mb-3 text-tertiary-container">
+                        <span class="material-symbols-outlined">star</span>
+                        <h2 class="text-headline-md font-headline-md" data-i18n="tldr_title">सबसे ज़रूरी बात</h2>
+                    </div>
+                    <p id="detail-tldr" class="text-body-lg font-body-lg text-on-surface leading-relaxed">
+                        दस्तावेज़ की जानकारी यहाँ दिखाई देगी...
+                    </p>
+                </div>
+            </section>
+
+            <!-- Key Data Chips -->
+            <section id="detail-key-chips" class="overflow-x-auto pb-4 -mx-margin-mobile px-margin-mobile detail-stagger" style="--stagger: 2">
+                <div class="flex gap-4 min-w-max">
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                        <div class="bg-primary/10 p-3 rounded-full text-primary"><span class="material-symbols-outlined">payments</span></div>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant" data-i18n="fee_amount">Fee Amount</p>
+                            <p class="text-body-lg font-body-lg font-bold text-on-surface">₹45,000</p>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                        <div class="bg-tertiary/10 p-3 rounded-full text-tertiary"><span class="material-symbols-outlined">calendar_today</span></div>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant" data-i18n="last_date">Last Date</p>
+                            <p class="text-body-lg font-body-lg font-bold text-on-surface">15 July 2024</p>
+                        </div>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                        <div class="bg-secondary/10 p-3 rounded-full text-secondary"><span class="material-symbols-outlined">account_balance</span></div>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant" data-i18n="account_no">Account No.</p>
+                            <p class="text-body-lg font-body-lg font-bold text-on-surface">**** 4567</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step-by-Step Breakdown -->
+            <section class="space-y-6 detail-stagger" style="--stagger: 3">
+                <div class="flex justify-between items-end">
+                    <h2 class="text-headline-md font-headline-md text-on-surface" data-i18n="next_steps">अगले कदम</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-label-md font-label-md text-on-surface-variant" data-i18n="english_phrases">English Phrases</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input class="sr-only peer" id="toggle-original" type="checkbox" value=""/>
+                            <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </label>
+                    </div>
+                </div>
+                <div id="detail-steps-container" class="space-y-4">
+                    <div class="group relative bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex gap-6">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shrink-0">1</div>
+                            <div class="space-y-2">
+                                <p class="text-body-lg font-body-lg text-on-surface" data-i18n="step_1_text">अपना 'Incomes Certificate' (आय प्रमाण पत्र) तैयार रखें।</p>
+                                <p class="original-text hidden text-label-md font-label-md text-outline italic"><span data-i18n="original_label">Original:</span> "Ensure you have a valid income certificate ready for verification."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex gap-6">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shrink-0">2</div>
+                            <div class="space-y-2">
+                                <p class="text-body-lg font-body-lg text-on-surface" data-i18n="step_2_text">वेबसाइट पर 'Registration' बटन पर क्लिक करें।</p>
+                                <p class="original-text hidden text-label-md font-label-md text-outline italic"><span data-i18n="original_label">Original:</span> "Click on the registration button on the official portal."</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex gap-6">
+                            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shrink-0">3</div>
+                            <div class="space-y-2">
+                                <p class="text-body-lg font-body-lg text-on-surface" data-i18n="step_3_text">दस्तावेज़ों को 'Upload' करने के बाद 'Final Submit' करें।</p>
+                                <p class="original-text hidden text-label-md font-label-md text-outline italic"><span data-i18n="original_label">Original:</span> "Upload required documents and perform final submission."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Items Checklist -->
+            <section class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant detail-stagger" style="--stagger: 4">
+                <h2 class="text-headline-md font-headline-md text-on-surface mb-6" data-i18n="checklist_title">चेकलिस्ट और समय सीमा</h2>
+                <div id="detail-checklist-container" class="space-y-4">
+                    <label class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
+                        <input class="w-6 h-6 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+                        <div class="flex-grow">
+                            <p class="text-body-md font-body-md font-bold" data-i18n="chk_aadhaar">आधार कार्ड लिंक करें</p>
+                            <p class="text-label-sm font-label-sm text-error" data-i18n="days_left_3">3 दिन बचे हैं</p>
+                        </div>
+                        <span class="material-symbols-outlined text-error">priority_high</span>
+                    </label>
+                    <label class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
+                        <input class="w-6 h-6 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+                        <div class="flex-grow">
+                            <p class="text-body-md font-body-md font-bold" data-i18n="chk_passbook">बैंक पासबुक की फोटोकॉपी</p>
+                            <p class="text-label-sm font-label-sm text-tertiary" data-i18n="days_left_12">12 दिन बचे हैं</p>
+                        </div>
+                        <span class="material-symbols-outlined text-tertiary">schedule</span>
+                    </label>
+                    <label class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
+                        <input class="w-6 h-6 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+                        <div class="flex-grow">
+                            <p class="text-body-md font-body-md font-bold" data-i18n="chk_bonafide">कॉलेज से बोनाफाइड लेटर</p>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant" data-i18n="days_left_25">25 दिन बचे हैं</p>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Glossary Accordion -->
+            <section class="detail-stagger" style="--stagger: 5">
+                <div class="wavy-divider-detail h-1 w-full bg-outline-variant mb-12"></div>
+                <h2 class="text-headline-md font-headline-md text-on-surface mb-6" data-i18n="difficult_words_title">मुश्किल शब्दों का मतलब</h2>
+                <div id="detail-glossary-container" class="divide-y divide-outline-variant border-y border-outline-variant">
+                    <details class="group py-4">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <span class="text-body-lg font-body-lg font-bold">Scholarship</span>
+                            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <div class="pt-4 text-body-md font-body-md text-on-surface-variant" data-i18n="glossary_scholarship_desc">
+                            इसे हिंदी में <strong class="text-on-surface">छात्रवृत्ति</strong> कहते हैं। यह वह आर्थिक मदद है जो सरकार या संस्था आपको पढ़ाई के लिए देती है।
+                        </div>
+                    </details>
+                    <details class="group py-4">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <span class="text-body-lg font-body-lg font-bold">Eligibility</span>
+                            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <div class="pt-4 text-body-md font-body-md text-on-surface-variant" data-i18n="glossary_eligibility_desc">
+                            इसका मतलब है <strong class="text-on-surface">पात्रता</strong>। यानी वह शर्तें जो आपको इस योजना का लाभ उठाने के लिए पूरी करनी होंगी।
+                        </div>
+                    </details>
+                    <details class="group py-4">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <span class="text-body-lg font-body-lg font-bold">Mandatory</span>
+                            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                        </summary>
+                        <div class="pt-4 text-body-md font-body-md text-on-surface-variant" data-i18n="glossary_mandatory_desc">
+                            इसका मतलब है <strong class="text-on-surface">अनिवार्य</strong>। यानी वह काम जो आपको हर हाल में करना ही होगा, इसके बिना काम नहीं चलेगा।
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Chat Q&A Section -->
+            <section class="detail-stagger space-y-6" style="--stagger: 6">
+                <div class="wavy-divider-detail h-1 w-full bg-outline-variant mb-12"></div>
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">chat</span>
+                    <h2 class="text-headline-md font-headline-md text-on-surface">सवाल पूछें (Ask a Question)</h2>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-sm overflow-hidden flex flex-col h-[450px]">
+                    <!-- Chat Messages Log -->
+                    <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4 bg-surface-container-low/30">
+                        <div class="flex gap-4 items-start max-w-[80%]">
+                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">PB</div>
+                            <div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
+                                दस्तावेज़ के बारे में कुछ भी पूछें। मैं आपका बड़ा भाई हूँ और बिना किसी कठिन शब्द के इसे समझाऊँगा!
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Suggested Follow-up chips -->
+                    <div id="chat-suggestions" class="px-6 py-3 border-t border-outline-variant/60 flex overflow-x-auto gap-2 no-scrollbar bg-surface-container-lowest shrink-0">
+                        <!-- Injected by JS -->
+                    </div>
+
+                    <!-- Chat Input form -->
+                    <form id="chat-form" class="p-4 border-t border-outline-variant flex gap-3 bg-surface-container-low shrink-0">
+                        <input type="text" id="chat-input" placeholder="अपनी भाषा में सवाल पूछें... (Ask a question...)" class="flex-1 px-4 py-3 bg-white border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" autocomplete="off"/>
+                        <button type="submit" class="bg-primary text-white w-12 h-12 rounded-xl flex items-center justify-center shrink-0 active:scale-95 hover:bg-primary-container transition-all">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Persistent Audio Player -->
+        <div class="fixed bottom-20 md:bottom-8 left-margin-mobile right-margin-mobile md:left-auto md:right-margin-desktop md:w-96 z-50">
+            <div class="bg-primary-container text-on-primary-container rounded-2xl p-4 shadow-xl flex items-center gap-4 border border-white/20 backdrop-blur-sm">
+                <button class="bg-white text-primary w-12 h-12 rounded-full flex items-center justify-center shrink-0 active:scale-90 transition-transform shadow-lg" id="playBtn">
+                    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                </button>
+                <div class="flex-grow flex flex-col gap-1">
+                    <div class="flex items-end gap-1 h-6">
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.1s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.3s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.5s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.2s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.4s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.6s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.1s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.8s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.4s"></div>
+                        <div class="waveform-bar bg-white/40 w-1 rounded-full" style="animation-delay: 0.2s"></div>
+                    </div>
+                    <p class="text-label-sm font-label-sm text-white/90">विवरण सुनें (Hindi AI Voice)</p>
+                </div>
+                <select class="bg-white/10 border-none text-white text-label-sm font-label-sm rounded-lg focus:ring-0 cursor-pointer">
+                    <option class="text-on-surface" value="1">1x</option>
+                    <option class="text-on-surface" value="1.5">1.5x</option>
+                    <option class="text-on-surface" value="2">2x</option>
+                </select>
+                <button class="material-symbols-outlined text-white/80 hover:text-white" id="btn-close-player">close</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation Bar (Mobile) -->
+        <nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-2 py-3 bg-surface shadow-[0_-4px_24px_rgba(28,18,8,0.08)] rounded-t-xl">
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('dashboard'); return false;">
+                <span class="material-symbols-outlined">home</span>
+                <span class="text-label-sm font-label-sm">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('documents'); return false;">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+                <span class="text-label-sm font-label-sm">Docs</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('glossary'); return false;">
+                <span class="material-symbols-outlined">menu_book</span>
+                <span class="text-label-sm font-label-sm">Glossary</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('support'); return false;">
+                <span class="material-symbols-outlined">help</span>
+                <span class="text-label-sm font-label-sm">Help</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 5: DOCUMENTS LIBRARY                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-documents" class="screen" data-screen="documents">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <div class="flex items-center gap-4">
+                <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="navigateTo('dashboard','back')">arrow_back</button>
+                <span class="text-headline-md font-headline-md font-bold text-primary">Documents</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full cursor-pointer transition-colors">search</span>
+                <span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full cursor-pointer transition-colors">filter_list</span>
+            </div>
+        </header>
+
+        <main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto max-w-[1200px] mx-auto space-y-8">
+            <!-- Search Bar -->
+            <div class="relative detail-stagger" style="--stagger: 0">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+                <input type="text" id="doc-search" placeholder="Search documents... / दस्तावेज़ खोजें..." data-i18n-placeholder="search_docs_placeholder" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"/>
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 detail-stagger" style="--stagger: 1" id="doc-filters">
+                <button class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-md font-label-md shrink-0 active:scale-95 transition-transform" data-filter="All">All</button>
+                <button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-filter="Scholarship">Scholarship</button>
+                <button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-filter="Fee">Fee</button>
+                <button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-filter="Hostel">Hostel</button>
+                <button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-filter="Admit">Admit</button>
+                <button class="px-4 py-2 bg-surface-container-high text-on-surface-variant rounded-full text-label-md font-label-md shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-filter="Notice">Notice</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center justify-between detail-stagger" style="--stagger: 2">
+                <p class="text-label-md font-label-md text-on-surface-variant">6 Documents</p>
+                <div class="flex items-center gap-1 text-label-sm font-label-sm text-outline">
+                    <span class="material-symbols-outlined text-sm">sort</span> Recent first
+                </div>
+            </div>
+
+            <!-- Documents List -->
+            <div class="space-y-4">
+                <!-- Doc 1 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 3" onclick="navigateTo('detail')" data-category="Scholarship">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Hindi</span>
+                                <span class="px-2 py-0.5 bg-tertiary/10 text-tertiary rounded text-[10px] font-label-sm font-bold uppercase">Scholarship</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">उत्तर प्रदेश स्कॉलरशिप (प्री-मैट्रिक)</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Oct 24, 2023 · 3 pages</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Doc 2 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 3" onclick="navigateTo('detail')" data-category="Hostel">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Hindi</span>
+                                <span class="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-label-sm font-bold uppercase">Hostel</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">Hostel Allotment Rules</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Oct 12, 2023 · 2 pages</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Doc 3 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 4" onclick="navigateTo('detail')" data-category="Fee">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Marathi</span>
+                                <span class="px-2 py-0.5 bg-tertiary/10 text-tertiary rounded text-[10px] font-label-sm font-bold uppercase">Fee</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">Tuition Fee Receipt - Semester 1</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Oct 09, 2023 · 1 page</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Doc 4 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 4" onclick="navigateTo('detail')" data-category="Admit">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Hindi</span>
+                                <span class="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-label-sm font-bold uppercase">Admit</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">Admission Confirmation Letter</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Sep 28, 2023 · 2 pages</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Doc 5 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 5" onclick="navigateTo('detail')" data-category="Notice">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Tamil</span>
+                                <span class="px-2 py-0.5 bg-tertiary/10 text-tertiary rounded text-[10px] font-label-sm font-bold uppercase">Notice</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">Exam Schedule Notice - Dec 2023</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Sep 15, 2023 · 1 page</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Doc 6 -->
+                <div class="doc-card bg-surface-container-lowest border border-outline-variant rounded-2xl p-4 shadow-[0_4px_24px_rgba(28,18,8,0.08)] hover:shadow-lg transition-shadow cursor-pointer detail-stagger" style="--stagger: 5" onclick="navigateTo('detail')" data-category="Scholarship">
+                    <div class="flex gap-4">
+                        <div class="w-16 h-20 bg-surface-variant rounded-lg flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-primary text-2xl opacity-60">description</span>
+                        </div>
+                        <div class="flex-grow min-w-0">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-secondary/10 text-secondary rounded text-[10px] font-label-sm font-bold uppercase">Bengali</span>
+                                <span class="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-label-sm font-bold uppercase">Scholarship</span>
+                            </div>
+                            <h5 class="font-bold text-on-surface leading-tight truncate">National Merit Scholarship Application</h5>
+                            <p class="text-xs text-on-surface-variant mt-1">Sep 01, 2023 · 4 pages</p>
+                        </div>
+                        <span class="material-symbols-outlined text-outline self-center">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Nav -->
+        <nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-2 py-3 bg-surface shadow-[0_-4px_24px_rgba(28,18,8,0.08)] rounded-t-xl">
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('dashboard','back'); return false;">
+                <span class="material-symbols-outlined">home</span><span class="text-label-sm font-label-sm">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span><span class="text-label-sm font-label-sm">Docs</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('glossary'); return false;">
+                <span class="material-symbols-outlined">menu_book</span><span class="text-label-sm font-label-sm">Glossary</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('support'); return false;">
+                <span class="material-symbols-outlined">help</span><span class="text-label-sm font-label-sm">Help</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 6: GLOSSARY                              -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-glossary" class="screen" data-screen="glossary">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <div class="flex items-center gap-4">
+                <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="navigateTo('dashboard','back')">arrow_back</button>
+                <span class="text-headline-md font-headline-md font-bold text-primary" data-i18n="glossary_title">Glossary / शब्दकोश</span>
+            </div>
+        </header>
+
+        <main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto max-w-[1200px] mx-auto space-y-8">
+            <!-- Search -->
+            <div class="relative detail-stagger" style="--stagger: 0">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+                <input type="text" id="glossary-search" placeholder="Search a term... / शब्द खोजें..." data-i18n-placeholder="search_glossary_placeholder" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-high border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"/>
+            </div>
+
+            <!-- Alphabet Quick Jump -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2 detail-stagger" style="--stagger: 1" id="glossary-alphabet-tabs">
+                <button class="px-3 py-1.5 bg-primary text-on-primary rounded-lg text-label-sm font-label-sm font-bold shrink-0 active:scale-95 transition-transform" data-range="All" data-i18n="categories_all">All</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="A-D">A-D</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="E-H">E-H</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="I-L">I-L</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="M-P">M-P</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="Q-T">Q-T</button>
+                <button class="px-3 py-1.5 bg-surface-container-high text-on-surface-variant rounded-lg text-label-sm font-label-sm font-bold shrink-0 hover:bg-surface-container-highest active:scale-95 transition-all" data-range="U-Z">U-Z</button>
+            </div>
+
+            <p class="text-label-md font-label-md text-on-surface-variant detail-stagger" style="--stagger: 1" data-i18n="terms_found">12 terms found</p>
+
+            <!-- Terms Accordion -->
+            <div class="divide-y divide-outline-variant border-y border-outline-variant detail-stagger" style="--stagger: 2" id="glossary-list">
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Admission</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">इसे हिंदी में <strong class="text-on-surface">प्रवेश</strong> कहते हैं। किसी कॉलेज या विश्वविद्यालय में दाखिला लेने की प्रक्रिया।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Bonafide Certificate</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">यह <strong class="text-on-surface">प्रमाण पत्र</strong> है जो साबित करता है कि आप उस संस्थान के वास्तविक छात्र हैं। छात्रवृत्ति और बैंक खाता खोलने के लिए ज़रूरी।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Domicile Certificate</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">मूल निवास प्रमाण पत्र</strong> — यह बताता है कि आप किस राज्य के स्थायी निवासी हैं। राज्य की स्कॉलरशिप लेने के लिए ज़रूरी।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Eligibility</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">इसका मतलब है <strong class="text-on-surface">पात्रता</strong>। यानी वह शर्तें जो आपको इस योजना का लाभ उठाने के लिए पूरी करनी होंगी।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Enrollment Number</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">आपका <strong class="text-on-surface">नामांकन संख्या</strong> — कॉलेज द्वारा दिया गया एक यूनिक नंबर जो हर फॉर्म में माँगा जाता है।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Income Certificate</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">आय प्रमाण पत्र</strong> — आपके परिवार की सालाना कमाई का सरकारी प्रमाण। स्कॉलरशिप और फीस माफी के लिए ज़रूरी।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Mandatory</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">इसका मतलब है <strong class="text-on-surface">अनिवार्य</strong>। यानी वह काम जो आपको हर हाल में करना ही होगा, इसके बिना काम नहीं चलेगा।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Migration Certificate</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">प्रवास प्रमाण पत्र</strong> — पुराने बोर्ड/विश्वविद्यालय से मिलता है जब आप नए संस्थान में जाते हैं।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Pre-Matric</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">प्री-मैट्रिक</strong> का मतलब 10वीं कक्षा से पहले की पढ़ाई। प्री-मैट्रिक स्कॉलरशिप कक्षा 1 से 10 तक के छात्रों के लिए है।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Scholarship</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant">इसे हिंदी में <strong class="text-on-surface">छात्रवृत्ति</strong> कहते हैं। यह वह आर्थिक मदद है जो सरकार या संस्था आपको पढ़ाई के लिए देती है।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Semester</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">सेमेस्टर</strong> — शैक्षणिक वर्ष का आधा हिस्सा (आमतौर पर 6 महीने)। एक साल में 2 सेमेस्टर होते हैं।</div>
+                </details>
+                <details class="group py-5">
+                    <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-lg font-body-lg font-bold">Verification</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span></summary>
+                    <div class="pt-3 text-body-md font-body-md text-on-surface-variant"><strong class="text-on-surface">सत्यापन</strong> — आपके दस्तावेज़ों की जाँच करने की प्रक्रिया। ओरिजिनल डॉक्यूमेंट दिखाना ज़रूरी है।</div>
+                </details>
+            </div>
+        </main>
+
+        <!-- Bottom Nav -->
+        <nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-2 py-3 bg-surface shadow-[0_-4px_24px_rgba(28,18,8,0.08)] rounded-t-xl">
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('dashboard','back'); return false;">
+                <span class="material-symbols-outlined">home</span><span class="text-label-sm font-label-sm">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('documents'); return false;">
+                <span class="material-symbols-outlined">description</span><span class="text-label-sm font-label-sm">Docs</span>
+            </a>
+            <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu_book</span><span class="text-label-sm font-label-sm">Glossary</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('support'); return false;">
+                <span class="material-symbols-outlined">help</span><span class="text-label-sm font-label-sm">Help</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 7: SUPPORT / HELP                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-support" class="screen" data-screen="support">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <div class="flex items-center gap-4">
+                <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="navigateTo('dashboard','back')">arrow_back</button>
+                <span class="text-headline-md font-headline-md font-bold text-primary" data-i18n="support_title">Help / सहायता</span>
+            </div>
+        </header>
+
+        <main class="pt-24 pb-32 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto max-w-[1200px] mx-auto space-y-10">
+
+            <!-- Quick Actions -->
+            <section class="grid grid-cols-2 gap-4 detail-stagger" style="--stagger: 0">
+                <div class="bg-primary-container/10 border border-primary/20 rounded-2xl p-5 flex flex-col items-center gap-3 text-center cursor-pointer hover:bg-primary-container/20 transition-colors active:scale-95">
+                    <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary text-2xl">chat</span>
+                    </div>
+                    <p class="text-label-md font-label-md text-primary font-bold" data-i18n="chat_ai">Chat Support</p>
+                    <p class="text-label-sm font-label-sm text-on-surface-variant">सीधे बात करें</p>
+                </div>
+                <div class="bg-secondary/5 border border-secondary/20 rounded-2xl p-5 flex flex-col items-center gap-3 text-center cursor-pointer hover:bg-secondary/10 transition-colors active:scale-95">
+                    <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-secondary text-2xl">call</span>
+                    </div>
+                    <p class="text-label-md font-label-md text-secondary font-bold" data-i18n="call_help">Call Helpline</p>
+                    <p class="text-label-sm font-label-sm text-on-surface-variant">1800-XXX-XXXX</p>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="detail-stagger" style="--stagger: 1">
+                <h2 class="text-headline-md font-headline-md text-on-surface mb-6" data-i18n="faq_title">अक्सर पूछे जाने वाले सवाल (FAQ)</h2>
+                <div class="divide-y divide-outline-variant border-y border-outline-variant">
+                    <details class="group py-5">
+                        <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-md font-body-md font-bold" data-i18n="faq_1_q">Pehli Baar क्या है?</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span></summary>
+                        <div class="pt-3 text-body-md font-body-md text-on-surface-variant" data-i18n="faq_1_a">Pehli Baar एक AI-powered ऐप है जो आपके जटिल दस्तावेज़ों (जैसे scholarship forms, hostel rules, fee receipts) को आसान भाषा में समझाता है — हिंदी, मराठी, तमिल, बांग्ला, तेलुगु और अंग्रेज़ी में।</div>
+                    </details>
+                    <details class="group py-5">
+                        <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-md font-body-md font-bold" data-i18n="faq_2_q">क्या मेरा डेटा सुरक्षित है?</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span></summary>
+                        <div class="pt-3 text-body-md font-body-md text-on-surface-variant" data-i18n="faq_2_a">बिल्कुल! आपके दस्तावेज़ की प्रोसेसिंग आपके फ़ोन पर होती है और कोई भी डेटा हमारे सर्वर पर सेव नहीं होता। हम end-to-end encryption का उपयोग करते हैं।</div>
+                    </details>
+                    <details class="group py-5">
+                        <summary class="flex justify-between items-center cursor-pointer list-none"><span class="text-body-md font-body-md font-bold" data-i18n="faq_3_q">कौन सी भाषाएं समर्थित हैं?</span><span class="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">expand_more</span></summary>
+                        <div class="pt-3 text-body-md font-body-md text-on-surface-variant" data-i18n="faq_3_a">हम वर्तमान में हिंदी, मराठी, तमिल, बंगाली, तेलुगु और अंग्रेजी का समर्थन करते हैं।</div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- Contact Card -->
+            <section class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant detail-stagger" style="--stagger: 2">
+                <h2 class="text-headline-md font-headline-md text-on-surface mb-6">संपर्क करें</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant">
+                        <span class="material-symbols-outlined text-primary">mail</span>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant">Email</p>
+                            <p class="text-body-md font-body-md font-bold text-on-surface">help@pehlibaar.in</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant">
+                        <span class="material-symbols-outlined text-primary">schedule</span>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant">Support Hours</p>
+                            <p class="text-body-md font-body-md font-bold text-on-surface">Mon–Sat, 9 AM – 6 PM IST</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant">
+                        <span class="material-symbols-outlined text-primary">language</span>
+                        <div>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant">Languages Supported</p>
+                            <p class="text-body-md font-body-md font-bold text-on-surface">Hindi, English, Marathi, Tamil</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Links -->
+            <section class="space-y-3 detail-stagger" style="--stagger: 3">
+                <a href="#" onclick="navigateTo('terms'); return false;" class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-3"><span class="material-symbols-outlined text-on-surface-variant">gavel</span><span class="text-body-md font-body-md">Terms of Service</span></div>
+                    <span class="material-symbols-outlined text-outline">chevron_right</span>
+                </a>
+                <a href="#" onclick="navigateTo('privacy'); return false;" class="flex items-center justify-between p-4 bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container-high transition-colors">
+                    <div class="flex items-center gap-3"><span class="material-symbols-outlined text-on-surface-variant">policy</span><span class="text-body-md font-body-md">Privacy Policy</span></div>
+                    <span class="material-symbols-outlined text-outline">chevron_right</span>
+                </a>
+            </section>
+
+            <!-- App Version -->
+            <div class="text-center py-4 detail-stagger" style="--stagger: 4">
+                <p class="text-label-sm font-label-sm text-outline">Pehli Baar v1.0.0 · Made with ❤️ for first-gen students</p>
+            </div>
+        </main>
+
+        <!-- Bottom Nav -->
+        <nav class="fixed bottom-0 left-0 w-full z-50 md:hidden flex justify-around items-center px-2 py-3 bg-surface shadow-[0_-4px_24px_rgba(28,18,8,0.08)] rounded-t-xl">
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('dashboard','back'); return false;">
+                <span class="material-symbols-outlined">home</span><span class="text-label-sm font-label-sm">Home</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('documents'); return false;">
+                <span class="material-symbols-outlined">description</span><span class="text-label-sm font-label-sm">Docs</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#" onclick="navigateTo('glossary'); return false;">
+                <span class="material-symbols-outlined">menu_book</span><span class="text-label-sm font-label-sm">Glossary</span>
+            </a>
+            <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1" href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">help</span><span class="text-label-sm font-label-sm">Help</span>
+            </a>
+        </nav>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 8: TERMS OF SERVICE                      -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-terms" class="screen" data-screen="terms">
+        <header class="fixed top-0 left-0 w-full z-50 flex items-center gap-4 px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="history.back()">arrow_back</button>
+            <span class="text-headline-md font-headline-md font-bold text-primary">Terms of Service</span>
+        </header>
+
+        <main class="pt-24 pb-16 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto max-w-[800px] mx-auto">
+            <div class="prose space-y-6">
+                <div class="detail-stagger" style="--stagger: 0">
+                    <p class="text-label-sm font-label-sm text-on-surface-variant mb-2">Last updated: October 1, 2023</p>
+                    <h2 class="text-headline-md font-headline-md text-on-surface mb-4">सेवा की शर्तें / Terms of Service</h2>
+                </div>
+
+                <div class="space-y-6 text-body-md font-body-md text-on-surface-variant leading-relaxed detail-stagger" style="--stagger: 1">
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">1. Acceptance of Terms</h3>
+                        <p>By accessing or using Pehli Baar ("the App"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the App.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">2. Description of Service</h3>
+                        <p>Pehli Baar is a free educational tool designed to help first-generation college students understand complex institutional documents in their native language using AI-powered translations and audio explanations.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">3. User Accounts</h3>
+                        <p>You may need to create an account to access certain features. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">4. User Content</h3>
+                        <p>Documents you upload are processed locally on your device and are not stored on our servers. You retain all rights to your uploaded content.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">5. AI-Generated Content</h3>
+                        <p>Translations and explanations are generated by AI and may not be 100% accurate. Always verify important information with your college administration or a trusted advisor.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">6. Prohibited Use</h3>
+                        <p>You may not use the App for any illegal activities, to upload harmful content, or to attempt to reverse-engineer the service.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">7. Contact</h3>
+                        <p>For questions about these Terms, contact us at <strong class="text-primary">legal@pehlibaar.in</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- SCREEN 9: PRIVACY POLICY                        -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <div id="screen-privacy" class="screen" data-screen="privacy">
+        <header class="fixed top-0 left-0 w-full z-50 flex items-center gap-4 px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="history.back()">arrow_back</button>
+            <span class="text-headline-md font-headline-md font-bold text-primary">Privacy Policy</span>
+        </header>
+
+        <main class="pt-24 pb-16 px-margin-mobile md:px-margin-desktop min-h-screen overflow-y-auto max-w-[800px] mx-auto">
+            <div class="prose space-y-6">
+                <div class="detail-stagger" style="--stagger: 0">
+                    <p class="text-label-sm font-label-sm text-on-surface-variant mb-2">Last updated: October 1, 2023</p>
+                    <h2 class="text-headline-md font-headline-md text-on-surface mb-4">गोपनीयता नीति / Privacy Policy</h2>
+                </div>
+
+                <div class="bg-secondary/5 border border-secondary/20 rounded-xl p-5 flex items-start gap-3 detail-stagger" style="--stagger: 1">
+                    <span class="material-symbols-outlined text-secondary mt-0.5" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    <p class="text-body-md font-body-md text-on-surface"><strong>Your data stays on your phone.</strong> We do not upload, store, or share your documents with anyone.</p>
+                </div>
+
+                <div class="space-y-6 text-body-md font-body-md text-on-surface-variant leading-relaxed detail-stagger" style="--stagger: 2">
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">1. Information We Collect</h3>
+                        <p>We collect minimal information: your phone number (for authentication), your preferred language, and basic usage analytics (screen views, feature usage). We do <strong>not</strong> collect or store your uploaded documents.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">2. Document Processing</h3>
+                        <p>All document scanning, OCR, and AI translation happens on-device. Your documents are never sent to external servers. Processed results are cached locally on your device only.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">3. Data Security</h3>
+                        <p>We use industry-standard encryption (AES-256) for data at rest and TLS 1.3 for data in transit. Your authentication tokens are stored securely in the device's encrypted keychain.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">4. Third-Party Services</h3>
+                        <p>We use Google Firebase for authentication and anonymous analytics. No personally identifiable document content is shared with any third party.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">5. Your Rights</h3>
+                        <p>You can delete your account and all associated data at any time from the app settings. You can also request a copy of your data by emailing us.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-on-surface mb-2">6. Contact</h3>
+                        <p>For privacy concerns, reach out to <strong class="text-primary">privacy@pehlibaar.in</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- Hidden Inputs -->
+    <input type="file" id="file-input" accept="image/*,application/pdf" class="hidden"/>
+
+    <!-- Camera Capture Overlay Modal -->
+    <div id="camera-modal" class="fixed inset-0 z-[1000] hidden flex flex-col items-center justify-center bg-inverse-surface/90 backdrop-blur-md p-margin-mobile">
+        <div class="w-full max-w-md bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-2xl flex flex-col relative">
+            <!-- Camera Header -->
+            <div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+                <h3 class="font-headline-md text-headline-md text-primary font-bold">फ़ोटो लें / Take Photo</h3>
+                <button id="camera-close" class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-1.5 rounded-full transition-colors active:scale-90">close</button>
+            </div>
+            <!-- Camera Body/Video -->
+            <div class="relative w-full aspect-[4/3] bg-black flex items-center justify-center overflow-hidden">
+                <video id="camera-preview" autoplay playsinline class="w-full h-full object-cover"></video>
+                <canvas id="camera-canvas" class="hidden"></canvas>
+                <!-- Scanner Guideline Box overlay -->
+                <div class="absolute inset-6 border-2 border-dashed border-primary/60 rounded-xl pointer-events-none flex items-center justify-center">
+                    <span class="text-xs text-primary/75 bg-surface-container-lowest/80 px-2 py-1 rounded-md font-bold select-none">Align Document Here</span>
+                </div>
+            </div>
+            <!-- Camera Controls -->
+            <div class="p-6 bg-surface-container-low border-t border-outline-variant flex justify-center items-center gap-6">
+                <button id="camera-capture" class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 hover:bg-primary-container transition-all">
+                    <span class="material-symbols-outlined text-4xl">photo_camera</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
