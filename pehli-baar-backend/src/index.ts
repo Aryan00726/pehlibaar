@@ -25,6 +25,7 @@ import { supportChatRouter } from "./routes/supportChat.route.js";
 import { DEFAULT_PORT, API_PREFIX } from "./constants.js";
 
 const app = express();
+app.set("trust proxy", 1);
 const port = parseInt(process.env["PORT"] ?? String(DEFAULT_PORT), 10);
 
 // ── Global Middleware (order matters) ───────────────────

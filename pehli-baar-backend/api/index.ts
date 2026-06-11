@@ -22,6 +22,7 @@ import { scanDocumentRouter } from "../src/routes/scanDocument.route.js";
 import { supportChatRouter } from "../src/routes/supportChat.route.js";
 
 const app = express();
+app.set("trust proxy", 1);
 
 // ── Global Middleware ───────────────────────────────────
 app.use(helmet());
