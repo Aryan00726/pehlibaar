@@ -19,6 +19,7 @@ import { chatRouter } from "../src/routes/chat.route.js";
 import { speakRouter } from "../src/routes/speak.route.js";
 import { authRouter } from "../src/routes/auth.route.js";
 import { scanDocumentRouter } from "../src/routes/scanDocument.route.js";
+import { supportChatRouter } from "../src/routes/supportChat.route.js";
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use("/api", authMiddleware);
 app.use("/api", rateLimiter);
 app.use("/api/decode", decodeRouter);
 app.use("/api/scan-document", scanDocumentRouter);
+app.use("/api/support-chat", supportChatRouter);
 app.use("/api/chat", chatRouter);
 app.use("/api/speak", speakRouter);
 

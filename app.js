@@ -808,6 +808,7 @@
         documents: document.getElementById('screen-documents'),
         glossary: document.getElementById('screen-glossary'),
         support: document.getElementById('screen-support'),
+        supportChat: document.getElementById('screen-support-chat'),
         terms: document.getElementById('screen-terms'),
         privacy: document.getElementById('screen-privacy')
     };
@@ -1831,6 +1832,102 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
         return msgId;
     }
+
+    // ── AI Support Chat Client ───────────────────────────
+    let supportChatHistory = [];
+    const btnChatSupport = document.getElementById('btn-chat-support');
+    const supportChatForm = document.getElementById('support-chat-form');
+    const supportChatInput = document.getElementById('support-chat-input');
+    const supportChatMessages = document.getElementById('support-chat-messages');
+
+    if (btnChatSupport) {
+        btnChatSupport.addEventListener('click', () => {
+            navigateTo('supportChat');
+        });
+    }
+
+    if (supportChatForm) {
+        supportChatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!supportChatInput || !supportChatMessages) return;
+            const message = supportChatInput.value.trim();
+            if (!message) return;
+
+            // Clear input
+            supportChatInput.value = '';
+
+            // Render user message
+            renderSupportChatMessage('user', message);
+
+            // Add user message to history
+            supportChatHistory.push({ role: 'user', content: message });
+
+            // Render thinking indicator
+            const thinkingId = renderSupportChatMessage('assistant', '...');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/support-chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        history: supportChatHistory.slice(0, -1), // send history before this turn
+                        language: localStorage.getItem('preferredLanguage') || 'hi'
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to get support chat reply.');
+                const data = await response.json();
+
+                // Remove thinking indicator and render actual reply
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+                renderSupportChatMessage('assistant', data.reply);
+
+                // Add assistant response to history
+                supportChatHistory.push({ role: 'assistant', content: data.reply });
+            } catch (err) {
+                const thinkingEl = document.getElementById(thinkingId);
+                if (thinkingEl) thinkingEl.remove();
+                renderSupportChatMessage('assistant', 'Error: ' + err.message);
+                // Remove failed user turn from history
+                supportChatHistory.pop();
+            }
+        });
+    }
+
+    function renderSupportChatMessage(role, content) {
+        const msgId = 'msg-support-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        const isUser = role === 'user';
+        
+        const msgHtml = isUser ? `
+            <div id="${msgId}" class="flex gap-4 items-start justify-end max-w-[85%] ml-auto">
+                <div class="bg-primary text-white p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
+                    ${content}
+                </div>
+                <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white text-xs font-bold shrink-0">मी</div>
+            </div>
+        ` : `
+            <div id="${msgId}" class="flex gap-4 items-start max-w-[85%]">
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">PB</div>
+                <div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
+                    ${content}
+                </div>
+            </div>
+        `;
+        
+        supportChatMessages.insertAdjacentHTML('beforeend', msgHtml);
+        supportChatMessages.scrollTop = supportChatMessages.scrollHeight;
+        return msgId;
+    }
+
+    // Global support suggestion helper
+    window.sendSupportSuggestion = function(suggestion) {
+        if (supportChatInput && supportChatForm) {
+            supportChatInput.value = suggestion;
+            supportChatForm.dispatchEvent(new Event('submit'));
+        }
+    };
 
     // Dummy functions for start/stop processing compatibility
     function startProcessing() {}

@@ -21,6 +21,7 @@ import { chatRouter } from "./routes/chat.route.js";
 import { speakRouter } from "./routes/speak.route.js";
 import { authRouter } from "./routes/auth.route.js";
 import { scanDocumentRouter } from "./routes/scanDocument.route.js";
+import { supportChatRouter } from "./routes/supportChat.route.js";
 import { DEFAULT_PORT, API_PREFIX } from "./constants.js";
 
 const app = express();
@@ -58,6 +59,7 @@ app.use(`${API_PREFIX}`, rateLimiter);
 
 app.use(`${API_PREFIX}/decode`, decodeRouter);
 app.use(`${API_PREFIX}/scan-document`, scanDocumentRouter);
+app.use(`${API_PREFIX}/support-chat`, supportChatRouter);
 app.use(`${API_PREFIX}/chat`, chatRouter);
 app.use(`${API_PREFIX}/speak`, speakRouter);
 

@@ -1261,7 +1261,7 @@
 
             <!-- Quick Actions -->
             <section class="grid grid-cols-2 gap-4 detail-stagger" style="--stagger: 0">
-                <div class="bg-primary-container/10 border border-primary/20 rounded-2xl p-5 flex flex-col items-center gap-3 text-center cursor-pointer hover:bg-primary-container/20 transition-colors active:scale-95">
+                <div id="btn-chat-support" class="bg-primary-container/10 border border-primary/20 rounded-2xl p-5 flex flex-col items-center gap-3 text-center cursor-pointer hover:bg-primary-container/20 transition-colors active:scale-95">
                     <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center">
                         <span class="material-symbols-outlined text-primary text-2xl">chat</span>
                     </div>
@@ -1357,6 +1357,48 @@
                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">help</span><span class="text-label-sm font-label-sm">Help</span>
             </a>
         </nav>
+    </div>
+
+
+    <!-- SCREEN 7B: SUPPORT AI CHAT -->
+    <div id="screen-support-chat" class="screen flex flex-col h-screen" data-screen="support-chat">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface shadow-[0_4px_24px_rgba(28,18,8,0.08)]">
+            <div class="flex items-center gap-4">
+                <button class="material-symbols-outlined text-primary active:scale-95 transition-transform" onclick="navigateTo('support','back')">arrow_back</button>
+                <span class="text-headline-md font-headline-md font-bold text-primary">AI Assistant / बड़ा भाई</span>
+            </div>
+        </header>
+
+        <!-- Main Chat Area -->
+        <main class="flex-grow pt-24 pb-4 px-margin-mobile md:px-margin-desktop max-w-[800px] mx-auto w-full flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+            <!-- Messages Container -->
+            <div id="support-chat-messages" class="flex-grow overflow-y-auto space-y-4 py-4 px-2 no-scrollbar">
+                <!-- Welcome Message -->
+                <div class="flex gap-4 items-start max-w-[85%]">
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">PB</div>
+                    <div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
+                        नमस्ते! मैं आपका बड़ा भाई हूँ। कॉलेज एडमिशन, स्कॉलरशिप (छात्रवृत्ति), फीस या किसी भी कॉलेज सम्बन्धी काम के बारे में कुछ भी पूछें, मैं आसान भाषा में समझाऊँगा!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions Area -->
+            <div id="support-chat-suggestions" class="flex gap-2 overflow-x-auto py-2 no-scrollbar shrink-0 border-t border-outline-variant/30">
+                <button class="shrink-0 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-primary border border-primary/20 rounded-full text-label-md font-label-md active:scale-95 transition-all" onclick="sendSupportSuggestion('स्कॉलरशिप फॉर्म कैसे भरें?')">स्कॉलरशिप कैसे मिलेगी?</button>
+                <button class="shrink-0 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-primary border border-primary/20 rounded-full text-label-md font-label-md active:scale-95 transition-all" onclick="sendSupportSuggestion('कॉलेज एडमिशन के लिए कौन-से डॉक्यूमेंट चाहिए?')">एडमिशन डॉक्यूमेंट्स</button>
+                <button class="shrink-0 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-primary border border-primary/20 rounded-full text-label-md font-label-md active:scale-95 transition-all" onclick="sendSupportSuggestion('बोनाफाइड सर्टिफिकेट क्या होता है और कैसे मिलता है?')">बोनाफाइड क्या है?</button>
+                <button class="shrink-0 px-4 py-2 bg-surface-container-low hover:bg-surface-container-high text-primary border border-primary/20 rounded-full text-label-md font-label-md active:scale-95 transition-all" onclick="sendSupportSuggestion('होस्टल अलॉटमेंट का प्रोसेस क्या है?')">होस्टल अलॉटमेंट</button>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form id="support-chat-form" class="mt-2 p-3 border border-outline-variant/60 rounded-2xl flex gap-3 bg-surface-container-low shrink-0 shadow-sm mb-4">
+                <input type="text" id="support-chat-input" placeholder="अपनी भाषा में सवाल पूछें... (Ask a question...)" class="flex-1 px-4 py-3 bg-white border border-outline-variant rounded-xl text-body-md font-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" autocomplete="off"/>
+                <button type="submit" class="bg-primary text-white w-12 h-12 rounded-xl flex items-center justify-center shrink-0 active:scale-95 hover:bg-primary-container transition-all">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </form>
+        </main>
     </div>
 
 

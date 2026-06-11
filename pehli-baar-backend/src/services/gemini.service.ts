@@ -218,3 +218,58 @@ export async function chatWithDocument(
 
   return await callGemini(body);
 }
+
+/**
+ * Sends a general support message to Gemini with conversation history.
+ *
+ * @param conversationHistory - Previous conversation turns
+ * @param userMessage - The user's new question
+ * @param language - Preferred language code
+ * @returns The assistant's reply text
+ */
+export async function generalSupportChat(
+  conversationHistory: Array<{ role: string; content: string }>,
+  userMessage: string,
+  language: string
+): Promise<string> {
+  const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
+
+  // System instruction for general support
+  const SUPPORT_SYSTEM_PROMPT = `You are Pehli Baar Support Assistant, a warm and helpful elder sibling (bade bhai/behen) for first-generation college students in India.
+Your goal is to answer general queries about college applications, admissions, scholarships, fees, document requests (like bonafide certificates, transfer certificates), hostel life, or how to use the Pehli Baar app.
+
+Rules:
+- Answer in simple Hinglish (Hindi + English mixed naturally), unless the student specifically asks in English.
+- Always explain any complex administrative or college terms in parentheses.
+- Be extremely encouraging, kind, and supportive.
+- If you don't know the answer to a specific official or college policy, tell the student how they can find out (e.g., visiting the administrative block, checking the notice board, talking to senior students).
+- Keep answers warm and concise (2-4 paragraphs max).`;
+
+  // Add conversation history
+  for (const turn of conversationHistory) {
+    contents.push({
+      role: turn.role === "user" ? "user" : "model",
+      parts: [{ text: turn.content }],
+    });
+  }
+
+  // Add the new user message
+  contents.push({
+    role: "user",
+    parts: [{ text: userMessage }],
+  });
+
+  const body = {
+    system_instruction: {
+      parts: [{ text: SUPPORT_SYSTEM_PROMPT }],
+    },
+    contents,
+    generationConfig: {
+      temperature: 0.5,
+      maxOutputTokens: 1024,
+    },
+  };
+
+  return await callGemini(body);
+}
+
