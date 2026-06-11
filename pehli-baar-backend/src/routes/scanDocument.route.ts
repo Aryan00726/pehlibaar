@@ -113,6 +113,7 @@ async function handleScanDocument(
       processing_time_ms: processingTimeMs,
     });
   } catch (err) {
+    console.error("Gemini Scan Error:", err);
     // Handle Gemini-specific errors
     if (err instanceof Error && err.message.includes("GEMINI_API_KEY")) {
       throw new AppError(

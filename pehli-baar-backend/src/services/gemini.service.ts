@@ -68,27 +68,52 @@ async function callGemini(body: Record<string, unknown>): Promise<any> {
   }
 
   const url = `${GEMINI_BASE_URL}/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+  
+  const maxRetries = 3;
+  let lastError: Error | null = null;
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Gemini API error (${response.status}): ${errorText}`);
+      if (!response.ok) {
+        const errorText = await response.text();
+        const isRetryable = response.status === 429 || response.status === 503 || response.status >= 500;
+        
+        if (isRetryable && attempt < maxRetries) {
+          const delay = attempt * 1500; // 1.5s, 3s
+          process.stderr.write(`⚠️  Gemini API returned ${response.status} (attempt ${attempt}/${maxRetries}). Retrying in ${delay}ms...\n`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          continue;
+        }
+        throw new Error(`Gemini API error (${response.status}): ${errorText}`);
+      }
+
+      const data = await response.json() as any;
+
+      // Extract text content from the response
+      const candidate = data?.candidates?.[0];
+      if (!candidate?.content?.parts?.[0]?.text) {
+        throw new Error("Gemini returned an empty response.");
+      }
+
+      return candidate.content.parts[0].text;
+    } catch (err) {
+      lastError = err instanceof Error ? err : new Error(String(err));
+      if (attempt < maxRetries) {
+        const delay = attempt * 1500;
+        process.stderr.write(`⚠️  Gemini call failed (attempt ${attempt}/${maxRetries}): ${lastError.message}. Retrying in ${delay}ms...\n`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        continue;
+      }
+    }
   }
 
-  const data = await response.json() as any;
-
-  // Extract text content from the response
-  const candidate = data?.candidates?.[0];
-  if (!candidate?.content?.parts?.[0]?.text) {
-    throw new Error("Gemini returned an empty response.");
-  }
-
-  return candidate.content.parts[0].text;
+  throw lastError || new Error("Failed to call Gemini API after retries.");
 }
 
 /**

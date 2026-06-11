@@ -101,6 +101,7 @@ export function errorHandler(
   }
 
   // Handle unknown errors — NEVER leak internal details
+  console.error("Unknown Error:", err);
   if (telemetry) {
     telemetry.trackException({
       exception: err,
