@@ -1459,7 +1459,7 @@
         });
     }
 
-    // ── Real Processing Pipeline (SSE Stream) ───────────────
+    // ── Real Processing Pipeline (Gemini API) ───────────────
     async function startRealProcessing(file) {
         navigateTo('processing', 'forward');
         
@@ -1481,118 +1481,77 @@
             currentAudio = null;
         }
 
+        // Animate progress while waiting for API
+        const progressStages = [
+            { percent: 20, text: 'दस्तावेज़ अपलोड हो रहा है... / Uploading document...', delay: 500 },
+            { percent: 40, text: 'दस्तावेज़ पढ़ा जा रहा है... / AI is reading document...', delay: 1500 },
+            { percent: 60, text: 'समझा जा रहा है... / Understanding content...', delay: 3000 },
+            { percent: 75, text: 'आसान भाषा में लिखा जा रहा है... / Simplifying for you...', delay: 5000 },
+        ];
+
+        const progressTimers = progressStages.map(stage => 
+            setTimeout(() => {
+                progressFill.style.width = stage.percent + '%';
+                progressPercent.textContent = stage.percent + '%';
+                statusEl.textContent = stage.text;
+            }, stage.delay)
+        );
+
         const preferredLanguage = localStorage.getItem('preferredLanguage') || 'hi';
         const formData = new FormData();
         formData.append('file', file);
         formData.append('language', preferredLanguage);
 
         try {
-            const response = await fetch(`${API_BASE_URL}/api/decode`, {
+            const response = await fetch(`${API_BASE_URL}/api/scan-document`, {
                 method: 'POST',
                 body: formData
             });
 
+            // Clear progress timers
+            progressTimers.forEach(t => clearTimeout(t));
+
             if (!response.ok) {
-                throw new Error('API server returned an error.');
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.message || 'AI server returned an error.');
             }
 
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder('utf-8');
-            let sseBuffer = '';
+            const payload = await response.json();
 
-            while (true) {
-                const { value, done } = await reader.read();
-                if (done) break;
+            // Show completion
+            progressFill.style.width = '100%';
+            progressPercent.textContent = '100%';
+            statusEl.textContent = '✅ तैयार है! / Ready!';
+            
+            currentSessionId = payload.sessionId;
+            currentDocumentData = payload;
 
-                sseBuffer += decoder.decode(value, { stream: true });
-                let boundary = sseBuffer.indexOf('\n\n');
-                
-                while (boundary !== -1) {
-                    const messageBlock = sseBuffer.substring(0, boundary).trim();
-                    sseBuffer = sseBuffer.substring(boundary + 2);
-                    
-                    if (messageBlock) {
-                        let eventType = 'message';
-                        let dataContent = '';
-                        
-                        const lines = messageBlock.split('\n');
-                        for (const line of lines) {
-                            if (line.startsWith('event:')) {
-                                eventType = line.substring(6).trim();
-                            } else if (line.startsWith('data:')) {
-                                dataContent = line.substring(5).trim();
-                            }
-                        }
-                        
-                        handleSSEEvent(eventType, dataContent, statusEl, progressFill, progressPercent);
-                    }
-                    boundary = sseBuffer.indexOf('\n\n');
-                }
+            // Render to Detail Screen with new Gemini format
+            renderDetailScreen(payload);
+
+            // Reset Chat view
+            const chatMessages = document.getElementById('chat-messages');
+            if (chatMessages) {
+                chatMessages.innerHTML = `
+                    <div class="flex gap-4 items-start max-w-[80%]">
+                        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">PB</div>
+                        <div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
+                            दस्तावेज़ के बारे में कुछ भी पूछें। मैं आपका बड़ा भाई हूँ और बिना किसी कठिन शब्द के इसे समझाऊँगा!
+                        </div>
+                    </div>
+                `;
             }
+
+            setTimeout(() => {
+                navigateTo('detail', 'forward');
+            }, 1000);
+
         } catch (err) {
+            // Clear progress timers
+            progressTimers.forEach(t => clearTimeout(t));
             statusEl.textContent = '❌ त्रुटि हुई / Error: ' + err.message;
             progressFill.style.backgroundColor = '#ba1a1a';
             console.error(err);
-        }
-    }
-
-    function handleSSEEvent(eventType, dataContent, statusEl, progressFill, progressPercent) {
-        if (eventType === 'error') {
-            try {
-                const errData = JSON.parse(dataContent);
-                statusEl.textContent = `❌ ${errData.message || 'त्रुटि हुई / Error'}`;
-            } catch {
-                statusEl.textContent = `❌ त्रुटि हुई / Error: ${dataContent}`;
-            }
-            progressFill.style.backgroundColor = '#ba1a1a';
-            return;
-        }
-
-        if (eventType === 'stage') {
-            if (dataContent === 'extracting') {
-                statusEl.textContent = 'दस्तावेज़ पढ़ा जा रहा है... / Reading document...';
-                progressFill.style.width = '35%';
-                progressPercent.textContent = '35%';
-            } else if (dataContent === 'simplifying') {
-                statusEl.textContent = 'आसान भाषा में समझाया जा रहा है... / Explaining in simple terms...';
-                progressFill.style.width = '70%';
-                progressPercent.textContent = '70%';
-            } else {
-                // Must be the final done payload
-                try {
-                    const payload = JSON.parse(dataContent);
-                    if (payload.stage === 'done') {
-                        progressFill.style.width = '100%';
-                        progressPercent.textContent = '100%';
-                        statusEl.textContent = '✅ तैयार है! / Ready!';
-                        
-                        currentSessionId = payload.sessionId;
-                        currentDocumentData = payload;
-
-                        // Render to Detail Screen
-                        renderDetailScreen(payload);
-
-                        // Reset Chat view
-                        const chatMessages = document.getElementById('chat-messages');
-                        if (chatMessages) {
-                            chatMessages.innerHTML = `
-                                <div class="flex gap-4 items-start max-w-[80%]">
-                                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">PB</div>
-                                    <div class="bg-surface-container-high text-on-surface p-4 rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm">
-                                        दस्तावेज़ के बारे में कुछ भी पूछें। मैं आपका बड़ा भाई हूँ और बिना किसी कठिन शब्द के इसे समझाऊँगा!
-                                    </div>
-                                </div>
-                            `;
-                        }
-
-                        setTimeout(() => {
-                            navigateTo('detail', 'forward');
-                        }, 1000);
-                    }
-                } catch (err) {
-                    console.error('Failed to parse done payload:', err);
-                }
-            }
         }
     }
 
@@ -1611,19 +1570,48 @@
         }
         if (detailDate) detailDate.textContent = 'Just Scanned';
 
-        // TL;DR
+        // TL;DR — supports both Gemini (mostImportantPoint) and old (simplified_text) format
+        const tldrText = payload.mostImportantPoint || payload.simplified_text || 'Document analyzed.';
         const detailTldr = document.getElementById('detail-tldr');
         if (detailTldr) {
-            detailTldr.innerHTML = payload.simplified_text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-bold">$1</strong>');
+            detailTldr.innerHTML = tldrText.replace(/\*\*(.*?)\*\*/g, '<strong class="text-primary font-bold">$1</strong>');
         }
 
-        // Key Data Chips
+        // Key Data Chips — supports both Gemini (cards[]) and old (amounts[] + deadline_dates[]) format
         const keyChipsSection = document.getElementById('detail-key-chips');
         if (keyChipsSection) {
             let chipsHtml = '<div class="flex gap-4 min-w-max">';
             
-            // Amounts
-            if (payload.amounts && payload.amounts.length > 0) {
+            const cards = payload.cards || [];
+            
+            if (cards.length > 0) {
+                // Gemini format: cards with label + value
+                cards.forEach(card => {
+                    // Auto-detect icon based on label content
+                    const label = (card.label || '').toLowerCase();
+                    let icon = 'info';
+                    if (label.includes('fee') || label.includes('amount') || label.includes('रकम') || label.includes('शुल्क') || label.includes('₹')) icon = 'payments';
+                    else if (label.includes('date') || label.includes('deadline') || label.includes('तारीख') || label.includes('last')) icon = 'calendar_today';
+                    else if (label.includes('phone') || label.includes('contact') || label.includes('helpline')) icon = 'call';
+                    else if (label.includes('email') || label.includes('mail')) icon = 'email';
+                    else if (label.includes('seat') || label.includes('rank') || label.includes('merit')) icon = 'leaderboard';
+                    else if (label.includes('college') || label.includes('university') || label.includes('institute')) icon = 'school';
+                    else if (label.includes('course') || label.includes('program') || label.includes('branch')) icon = 'menu_book';
+                    
+                    const colorClass = icon === 'calendar_today' ? 'tertiary' : icon === 'payments' ? 'primary' : 'secondary';
+                    
+                    chipsHtml += `
+                        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
+                            <div class="bg-${colorClass}/10 p-3 rounded-full text-${colorClass}"><span class="material-symbols-outlined">${icon}</span></div>
+                            <div>
+                                <p class="text-label-sm font-label-sm text-on-surface-variant">${card.label}</p>
+                                <p class="text-body-lg font-body-lg font-bold text-on-surface">${card.value}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else if (payload.amounts && payload.amounts.length > 0) {
+                // Old format fallback
                 payload.amounts.forEach(amt => {
                     chipsHtml += `
                         <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
@@ -1638,43 +1626,26 @@
             } else {
                 chipsHtml += `
                     <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
-                        <div class="bg-primary/10 p-3 rounded-full text-primary"><span class="material-symbols-outlined">payments</span></div>
+                        <div class="bg-primary/10 p-3 rounded-full text-primary"><span class="material-symbols-outlined">info</span></div>
                         <div>
-                            <p class="text-label-sm font-label-sm text-on-surface-variant">रकम / Amount</p>
-                            <p class="text-body-lg font-body-lg font-bold text-on-surface">कोई शुल्क नहीं / No Fees</p>
+                            <p class="text-label-sm font-label-sm text-on-surface-variant">Status</p>
+                            <p class="text-body-lg font-body-lg font-bold text-on-surface">Document Analyzed ✅</p>
                         </div>
                     </div>
                 `;
-            }
-
-            // Deadlines
-            if (payload.deadline_dates && payload.deadline_dates.length > 0) {
-                payload.deadline_dates.forEach(dl => {
-                    const parts = dl.split('—');
-                    const dateText = parts[0] ? parts[0].trim() : 'Deadline';
-                    const descText = parts[1] ? parts[1].trim() : dl;
-                    chipsHtml += `
-                        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
-                            <div class="bg-tertiary/10 p-3 rounded-full text-tertiary"><span class="material-symbols-outlined">calendar_today</span></div>
-                            <div>
-                                <p class="text-label-sm font-label-sm text-on-surface-variant">${descText}</p>
-                                <p class="text-body-lg font-body-lg font-bold text-on-surface">${dateText}</p>
-                            </div>
-                        </div>
-                    `;
-                });
             }
 
             chipsHtml += '</div>';
             keyChipsSection.innerHTML = chipsHtml;
         }
 
-        // Steps (Next Steps)
+        // Steps — supports both Gemini (nextSteps[]) and old (key_actions[]) format
+        const steps = payload.nextSteps || payload.key_actions || [];
         const stepsContainer = document.getElementById('detail-steps-container');
         if (stepsContainer) {
             stepsContainer.innerHTML = '';
-            if (payload.key_actions && payload.key_actions.length > 0) {
-                payload.key_actions.forEach((action, idx) => {
+            if (steps.length > 0) {
+                steps.forEach((action, idx) => {
                     const stepCard = `
                         <div class="group relative bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                             <div class="flex gap-6">
@@ -1692,30 +1663,33 @@
             }
         }
 
-        // Checklist
+        // Checklist — use cards with date-like values or deadline_dates
         const checklistContainer = document.getElementById('detail-checklist-container');
         if (checklistContainer) {
             checklistContainer.innerHTML = '';
-            if (payload.deadline_dates && payload.deadline_dates.length > 0) {
-                payload.deadline_dates.forEach((dl) => {
+            const deadlines = payload.deadline_dates || [];
+            // Also extract date-like cards from Gemini response
+            const dateCards = (payload.cards || []).filter(c => {
+                const label = (c.label || '').toLowerCase();
+                return label.includes('date') || label.includes('deadline') || label.includes('last') || label.includes('तारीख');
+            });
+
+            if (deadlines.length > 0) {
+                deadlines.forEach(dl => {
                     const parts = dl.split('—');
                     const dateText = parts[0] ? parts[0].trim() : 'Urgent';
                     const descText = parts[1] ? parts[1].trim() : dl;
-
-                    const chkCard = `
-                        <label class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
-                            <input class="w-6 h-6 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
-                            <div class="flex-grow">
-                                <p class="text-body-md font-body-md font-bold">${descText}</p>
-                                <p class="text-label-sm font-label-sm text-error">${dateText}</p>
-                            </div>
-                            <span class="material-symbols-outlined text-error">priority_high</span>
-                        </label>
-                    `;
-                    checklistContainer.insertAdjacentHTML('beforeend', chkCard);
+                    checklistContainer.insertAdjacentHTML('beforeend', createChecklistItem(descText, dateText));
+                });
+            } else if (dateCards.length > 0) {
+                dateCards.forEach(card => {
+                    checklistContainer.insertAdjacentHTML('beforeend', createChecklistItem(card.label, card.value));
                 });
             } else {
-                checklistContainer.innerHTML = '<p class="text-on-surface-variant">No checklist items found.</p>';
+                // Use nextSteps as checklist items
+                steps.forEach(step => {
+                    checklistContainer.insertAdjacentHTML('beforeend', createChecklistItem(step, ''));
+                });
             }
         }
 
@@ -1745,10 +1719,24 @@
             });
         }
 
-        // Render follow-up suggestions
-        if (payload.follow_up_suggestions) {
-            renderChatSuggestions(payload.follow_up_suggestions);
+        // Render follow-up suggestions — supports both formats
+        const suggestions = payload.suggestedQuestions || payload.follow_up_suggestions || [];
+        if (suggestions.length > 0) {
+            renderChatSuggestions(suggestions);
         }
+    }
+
+    function createChecklistItem(text, dateText) {
+        return `
+            <label class="flex items-center gap-4 p-4 bg-white rounded-xl border border-outline-variant cursor-pointer active:scale-[0.98] transition-transform">
+                <input class="w-6 h-6 rounded text-primary focus:ring-primary border-outline-variant" type="checkbox"/>
+                <div class="flex-grow">
+                    <p class="text-body-md font-body-md font-bold">${text}</p>
+                    ${dateText ? `<p class="text-label-sm font-label-sm text-error">${dateText}</p>` : ''}
+                </div>
+                ${dateText ? '<span class="material-symbols-outlined text-error">priority_high</span>' : '<span class="material-symbols-outlined text-primary">check_circle</span>'}
+            </label>
+        `;
     }
 
     function renderChatSuggestions(suggestions) {

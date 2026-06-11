@@ -11,7 +11,7 @@
 import { Router } from "express";
 import type { Request, Response, NextFunction } from "express";
 import { getSession, appendConversationTurn } from "../services/session.service.js";
-import { chatWithContext } from "../services/chat.service.js";
+import { chatWithDocument } from "../services/gemini.service.js";
 import { isSupportedLanguage } from "../utils/languageMap.js";
 import {
   AppError,
@@ -92,8 +92,8 @@ chatRouter.post(
       // Build document context (combine extracted and simplified text)
       const documentContext = `Original Document:\n${session.documentContext}\n\nSimplified Explanation:\n${session.simplifiedText}`;
 
-      // Get AI reply
-      const reply = await chatWithContext(
+      // Get AI reply via Gemini
+      const reply = await chatWithDocument(
         documentContext,
         session.conversationHistory,
         body.message.trim(),
